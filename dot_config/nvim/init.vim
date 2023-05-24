@@ -22,35 +22,17 @@ Plug 'jreybert/vimagit'
 " Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
-Plug 'ap/vim-css-color'
 Plug 'morhetz/gruvbox'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 "     let g:ycm_filetype_blacklist = { 'tex': 1 }
-Plug 'sirver/ultisnips'
-Plug 'lervag/vimtex'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+" Plug 'sirver/ultisnips'
 call plug#end()
 
 " PLUGIN CUSTOM SETTINGS
 " UltiSnips
-    let g:UltiSnipsExpandTrigger = '<tab>'
-    let g:UltiSnipsJumpForwardTrigger = '<tab>'
-    let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-
-" VimTex
-    let g:tex_flavor='latex'
-    let g:vimtex_view_method='skim'
-    let g:vimtex_quickfix_mode=0
-    let g:vimtex_compiler_latexmk = {
-    \ 'options' : [
-    \   '-shell-escape',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \   '-interaction=nonstopmode',
-    \ ],
-    \}
+    " let g:UltiSnipsExpandTrigger = '<tab>'
+    " let g:UltiSnipsJumpForwardTrigger = '<tab>'
+    " let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 """ PLUGIN SETUP FINISHED
 
