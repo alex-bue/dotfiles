@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ $brews := list
+     "bat"
+     "curl"
+     "exa"
+     "fd"
+     "ffmpeg"
+     "gh"
+     "git"
+     "git-lfs"
+     "node"
+     "openjdk"
+     "ripgrep"
+     "tmux"
+     "wget"
+     "xz"
+     "tree" -}}
+
+{{ $casks := list
+     "1password"
+     "1password-cli"
+     "google-chrome"
+     "karabiner-elements"
+     "visual-studio-code"
+     "kitty"
+     "firefox"
+     "obsidian"
+     "amethyst"
+     "onedrive"
+     "intellij-idea" -}}
+
+brew bundle --no-lock --verbose --file=/dev/stdin <<EOF
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
+EOF
