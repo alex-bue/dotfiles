@@ -75,6 +75,9 @@ nnoremap <leader>q :quit<CR>
 nnoremap <leader>vim :vsp $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" Yank to system clipboard
+vnoremap <silent> <leader>y "+y
+
 " Autoexpanding
 inoremap (; (<CR>);<C-c>O
 inoremap (, (<CR>),<C-c>O
@@ -86,17 +89,3 @@ inoremap [, [<CR>],<C-c>O
 " Split Windows open at the bottom and right
 set splitbelow splitright
   
-" Alias for Replace All
-" map S :%s//g<Left><Left>
-
-" Workaround for creating transparent bg
-autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
-        \ |    highlight LineNr     ctermbg=NONE guibg=NONE
-        \ |    highlight SignColumn ctermbg=NONE guibg=NONE
-
-" Remember folds
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave * mkview
-"   autocmd BufWinEnter * silent! loadview
-" augroup END
