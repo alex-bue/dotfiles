@@ -35,7 +35,7 @@ set -eufo pipefail
      "onedrive"
      "intellij-idea" -}}
 
-brew bundle --no-lock --verbose --file=/dev/stdin <<EOF
+brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
