@@ -1,0 +1,37 @@
+{{ if eq .osid "linux-debian" "linux-raspbian" "linux-pop" "linux-ubuntu" -}}
+
+{{ $packages := list
+     "bat"
+     "curl"
+     "git"
+     "git-lfs"
+     "neovim"
+     "htop"
+     "ripgrep"
+     "zsh"
+     "kitty"
+     "firefox"
+     -}}
+{{ $classicSnaps := list 
+     "code"
+     -}}
+
+{{ $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{   $sudo = "" -}}
+{{ end -}}
+
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ $sudo }}apt-get update
+{{ $sudo }}apt-get install -y {{ $packages | join " " }}
+
+{{ if lookPath "snap" }}
+{{   range $classicSnaps }}
+{{ $sudo }}snap install --classic {{ . }}
+{{   end }}
+{{ end }}
+
+{{ end -}}
