@@ -33,7 +33,9 @@ set -eufo pipefail
      "amethyst"
      "onedrive"
      "eurkey"
-     "intellij-idea" -}}
+     "intellij-idea"
+     "nvidia-geforce-now" 
+     "anki" -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
