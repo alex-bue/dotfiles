@@ -35,7 +35,8 @@ set -eufo pipefail
      "eurkey"
      "intellij-idea"
      "nvidia-geforce-now" 
-     "anki" -}}
+     "anki"
+     "iina" -}}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
