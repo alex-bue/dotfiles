@@ -22,7 +22,8 @@ Plug 'jreybert/vimagit'
 " Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-commentary'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 "     let g:ycm_filetype_blacklist = { 'tex': 1 }
 " Plug 'sirver/ultisnips'
@@ -37,7 +38,7 @@ call plug#end()
 """ PLUGIN SETUP FINISHED
 
 " Set colourscheme
-autocmd vimenter * ++nested colorscheme gruvbox
+autocmd vimenter * ++nested colorscheme nord
 
 " Basic settings
 set title " displays path of file and its name
