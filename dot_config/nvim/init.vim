@@ -79,7 +79,10 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " Yank to system clipboard
 vnoremap <silent> <leader>y "+y
 
-" Autoexpanding
+" Split Windows open at the bottom and right
+set splitbelow splitright
+
+" Plugin Autoexpanding
 inoremap (; (<CR>);<C-c>O
 inoremap (, (<CR>),<C-c>O
 inoremap {; {<CR>};<C-c>O
@@ -87,6 +90,8 @@ inoremap {, {<CR>},<C-c>O
 inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
 
-" Split Windows open at the bottom and right
-set splitbelow splitright
+" Plugin FZF
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <C-f> :Files<CR>
+nnoremap <silent> <Leader>f :Rg<CR>
   
