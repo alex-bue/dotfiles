@@ -1,0 +1,17 @@
+# Activate vi mode
+set -o vi
+
+# Use Vi-like keys for command line editing
+bind -m vi-command "h":backward-char
+bind -m vi-command "k":history-search-backward
+bind -m vi-command "l":forward-char
+bind -m vi-command "j":history-search-forward
+bind -m vi-insert "^?":backward-delete-char
+
+# LOAD ALIASES AND SHORTCUTS (if existent).
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+
+# Load fzf (if the file exists)
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+
+export TERM=xterm-256color
