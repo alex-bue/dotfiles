@@ -9,7 +9,7 @@ bind -m vi-command "j":history-search-forward
 bind -m vi-insert "^?":backward-delete-char
 
 # LOAD ALIASES AND SHORTCUTS (if existent).
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+[ -f "$HOME/.shell_aliases" ] && source "$HOME/.shell_aliases"
 
 # Load fzf (if the file exists)
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
