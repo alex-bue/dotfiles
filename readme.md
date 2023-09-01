@@ -6,13 +6,11 @@ This repository contains my dotfiles and configurations managed using Chezmoi.
 
 Before applying these dotfiles to a new machine, make sure you have Chezmoi installed. You can install Chezmoi by following the instructions at [www.chezmoi.io/install/](https://chezmoi.io/docs/install/).
 
-For one line install and application:
-
+One-line Installation into /bin:
 `sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME`
 
-without scripts:
-
-`sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply --exclude=scripts $GITHUB_USERNAME`
+One-line Installation into /.local/bin:
+`sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply $GITHUB_USERNAME`
 
 ## Using chezmoi across multiple machines
 
