@@ -18,3 +18,9 @@ bind -m vi-insert "^?":backward-delete-char
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 export TERM=xterm-256color
+
+# Activate starship prompt if installed
+if command -v starship &> /dev/null; then
+    eval "$(starship init bash)"
+fi
+
