@@ -1,3 +1,6 @@
+# Ensure binaries are added to path
+export PATH="$HOME/.local/bin:$PATH"
+
 # Activate vi mode
 set -o vi
 
