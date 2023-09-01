@@ -12,9 +12,9 @@ alias \
 	bc="bc -ql" \
 
 # more neat shortcuts for basic commands
-alias ll='ls -A'
+alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -A'
+alias l='ls -CF'
 
 # Git aliases (WIP cherrypicked from oh-my-zsh plugin)
 alias ga="git add"
