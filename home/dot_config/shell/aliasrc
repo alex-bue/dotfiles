@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vi" \
+	mkdir="mkdir -pv" \
+	bc="bc -ql" \
+
+# zsh-dir-stack
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# Dotfile Git Bare Repo
+alias dot='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# QMK
+alias keymap="cd $HOME/Projects/qmk_firmware/keyboards/planck/keymaps/alex-bue"
+
+# Quickly edit config files in vim
+alias vimconfig="vim $HOME/.config/nvim/init.vim"
+alias zshconfig="vim $HOME/.config/zsh/.zshrc"
+alias aliasconfig="vim $HOME/.config/shell/aliasrc"
+
+# Reload shell
+alias reload="source $HOME/.config/zsh/.zshrc"
+
+# Folder Shortcuts
+alias dl="cd $HOME/Downloads"
+
+# for uni
+alias ds="cd $HOME/OneDrive/uni/master/ds"
+
+# Sem 1
+alias va="cd $HOME/OneDrive/uni/master/ds/1-sem/visual-analytics"
+alias df="cd $HOME/OneDrive/uni/master/ds/1-sem/datafication"
+alias inno="cd $HOME/OneDrive/uni/master/ds/1-sem/innovation-and-strategy"
+alias foundations="cd $HOME/OneDrive/uni/master/ds/1-sem/foundations-ds"
+
+# Sem 2
+alias pa="cd $HOME/OneDrive/uni/master/ds/2-sem/pa"
+alias ml="cd $HOME/OneDrive/uni/master/ds/2-sem/ml"
+alias de="cd $HOME/OneDrive/uni/master/ds/2-sem/de"
+alias nlp="cd $HOME/OneDrive/uni/master/ds/2-sem/nlp"
+
+# Website shortcuts
+alias overleaf="open https://www.overleaf.com/project"
+
+# Git aliases (WIP cherrypicked from oh-my-zsh plugin)
+alias ga="git add"
+alias gaa="git add --all"
+alias gau="git add --update"
+alias gb="git branch"
+alias gc="git commit -v"
+alias gca="git commit -v -a"
+alias gcam="git commit -a -m"
+alias gcmsg="git commit -m"
+alias gcf="git config --list"
+alias gco="git checkout"
+alias gsw="git switch"
+alias gd="git diff"
+alias gf="git fetch"
+alias gp="git push"
+alias gpom="git push origin main"
+alias gpl="git pull"
+alias gr="git remote"
+alias grs="git remote show"
+alias gst="git status"
+alias glog='git log --oneline --decorate --graph'
+alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
+alias glols="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
