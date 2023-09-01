@@ -27,7 +27,7 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
 # LOAD ALIASES AND SHORTCUTS (if existent).
-[ -f "$HOME/.shell_aliases" ] && source "$HOME/.shell_aliases"
+[ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 
 # COMPLETION
 autoload -Uz compinit 
