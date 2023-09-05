@@ -1,5 +1,6 @@
 # Ensure binaries are added to path
 export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim"
 
 # Activate vi mode
 set -o vi
