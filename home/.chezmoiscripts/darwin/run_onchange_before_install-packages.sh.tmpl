@@ -4,6 +4,8 @@ set -eufo pipefail
 
 {{ $brews := list
      "bat"
+     "neovim"
+     "chezmoi"
      "curl"
      "exa"
      "fd"
@@ -18,7 +20,8 @@ set -eufo pipefail
      "wget"
      "htop"
      "xz"
-     "tree" -}}
+     "tree"
+     "fzf" -}}
 
 {{ $casks := list
      "kitty"
@@ -26,7 +29,6 @@ set -eufo pipefail
      "1password-cli"
      "google-chrome"
      "firefox"
-     "alfred"
      "karabiner-elements"
      "visual-studio-code"
      "obsidian"
@@ -36,7 +38,9 @@ set -eufo pipefail
      "intellij-idea"
      "nvidia-geforce-now" 
      "anki"
-     "iina" -}}
+     "iina"
+     "raycast" -}}
+
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range ($brews | sortAlpha | uniq) -}}
@@ -46,3 +50,6 @@ brew "{{ . }}"
 cask "{{ . }}"
 {{ end -}}
 EOF
+
+# Install or update fzf
+$(brew --prefix)/opt/fzf/install
