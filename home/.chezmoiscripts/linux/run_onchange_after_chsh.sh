@@ -8,7 +8,3 @@ else
     echo "Incorrect password or unable to change the shell."
 fi
 
-# start a new zsh session
-exec /bin/zsh
-
-
