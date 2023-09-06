@@ -11,7 +11,11 @@
      "zsh"
      "kitty"
      "firefox"
+     "fzf"
      -}}
+
+{{ $snaps := list -}}
+
 {{ $classicSnaps := list 
      "code"
      -}}
@@ -29,8 +33,11 @@ set -eufo pipefail
 {{ $sudo }}apt-get install -y {{ $packages | join " " }}
 
 {{ if lookPath "snap" }}
+{{   range $snaps }}
+( snap info {{ . }} | grep -q ^installed: ) || {{ $sudo }}snap install {{ . }}
+{{   end }}
 {{   range $classicSnaps }}
-{{ $sudo }}snap install --classic {{ . }}
+( snap info {{ . }} | grep -q ^installed: ) || {{ $sudo }}snap install --classic {{ . }}
 {{   end }}
 {{ end }}
 

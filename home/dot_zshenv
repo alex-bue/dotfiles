@@ -2,6 +2,13 @@
 
 # Export Environment Variable #
 
+# ensure path is correct
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+
 # editor
 export EDITOR="nvim"
 export VISUAL="nvim"
