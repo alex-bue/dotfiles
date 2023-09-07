@@ -9,5 +9,3 @@ Chezmoi documentation: [chezmoi.io](https://chezmoi.io/).
 ```
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" --init --apply alex-bue
 ```
-
-One-line installation into /.local/bin)
