@@ -14,5 +14,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # zsh
-export HISTSIZE=10000                   # Maximum events for internal history
-export SAVEHIST=10000                   # Maximum events in history file
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=100000                   # Maximum events for internal history
+export SAVEHIST=100000                   # Maximum events in history file
