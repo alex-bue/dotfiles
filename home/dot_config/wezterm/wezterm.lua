@@ -1,6 +1,9 @@
 -- Pull in the wezterm API
 local wezterm = require 'wezterm'
 
+local cfg_appearance = require 'cfg_appearance'
+local cfg_fonts = require 'cfg_fonts'
+
 -- This table will hold the configuration.
 local config = {}
 
@@ -11,9 +14,8 @@ if wezterm.config_builder then
 end
 
 -- This is where you actually apply your config choices
-
--- For example, changing the color scheme:
-config.color_scheme = 'nord'
+cfg_appearance.apply_to_config(config)
+cfg_fonts.apply_to_config(config)
 
 -- and finally, return the configuration to wezterm
 return config
