@@ -6,6 +6,10 @@ local module = {}
 function module.apply_to_config(config)
     config.keys = {
 
+        -- Move scrollback
+        { key = 'U', mods = 'CTRL|SHIFT', action = act.ScrollByPage(-1) },
+        { key = 'D', mods = 'CTRL|SHIFT', action = act.ScrollByPage(1) },
+
         -- Pane:
         -- Move around panes
         { key = 'H', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Left' },
