@@ -16,8 +16,9 @@
 # layouts - Ordered list of layouts to use by layout key (default tall, wide, fullscreen, and column).
 layouts:
   - tall
-  # - tall-right
+  - floating
   - fullscreen
+  # - tall-right
   # - wide
   # - two-pane
   # - middle-wide
@@ -28,7 +29,6 @@ layouts:
   # - 4column-right
   # - column
   # - row
-  - floating
   # - widescreen-tall
   # - widescreen-tall-right
   # - bsp
