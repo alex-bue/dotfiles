@@ -226,9 +226,13 @@ throw-space-8:
   mod: mod2
   key: 8
 
-throw-space-8:
+throw-space-9:
   mod: mod2
   key: 9
+
+throw-space-10:
+  mod: <NONE>
+  key: <NONE>
 
 # Select tall layout
 select-tall-layout:
@@ -262,7 +266,7 @@ throw-space-right:
 
 # Toggle the floating state of the currently focused window; i.e., if it was floating make it tiled and if it was tiled make it floating.
 toggle-float:
-  mod: mod1
+  mod: mod2
   key: x
 
 # Display the layout HUD with the current layout on each screen.
