@@ -9,6 +9,9 @@ function module.apply_to_config(config)
     config.font_size = 14.0
 
     config.font = wezterm.font('JetBrains Mono', {weight = 'DemiBold' })
+
+    -- Disable 
+    config.harfbuzz_features = { 'zero' }
 end
 
 return module
