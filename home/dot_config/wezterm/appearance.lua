@@ -27,6 +27,9 @@ function module.apply_to_config(config)
     config.hide_tab_bar_if_only_one_tab = true
     config.tab_bar_at_bottom = false
 
+    -- Scrollback Buffer
+    config.scrollback_lines = 5000
+
     -- Window frame fonnt and colour
     config.window_frame = {
         font = wezterm.font { family = 'JetBrains Mono', weight = 'Bold' },
