@@ -46,7 +46,7 @@ alias keymap="cd $HOME/Projects/qmk_firmware/keyboards/planck/keymaps/alex-bue"
 # Quickly edit config files in vim
 alias vimconfig="vim $HOME/.config/nvim/init.vim"
 alias zshconfig="vim $HOME/.zshrc"
-alias aliasconfig="vim $HOME/.aliases
+alias aliasconfig="vim $HOME/.aliases"
 
 # Reload shell
 alias reload="source $HOME/.zshrc"
