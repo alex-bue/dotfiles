@@ -125,3 +125,6 @@ defaults write com.apple.dock show-recents -bool false
 
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
+
+# Auto-hide menu bar
+#defaults write NSGlobalDomain _HIHideMenuBar -bool true
