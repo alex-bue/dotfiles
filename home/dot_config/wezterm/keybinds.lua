@@ -22,10 +22,10 @@ function module.apply_to_config(config)
         { key = 'K', mods = 'CTRL|SHIFT|SUPER', action = act.RotatePanes 'CounterClockwise' },
 
         -- Resize panes
-        { key = 'H', mods = 'SHIFT|ALT', action = act.AdjustPaneSize{ 'Left', 1 } },
-        { key = 'L', mods = 'SHIFT|ALT', action = act.AdjustPaneSize{ 'Right', 1 } },
-        { key = 'K', mods = 'SHIFT|ALT', action = act.AdjustPaneSize{ 'Up', 1 } },
-        { key = 'J', mods = 'SHIFT|ALT', action = act.AdjustPaneSize{ 'Down', 1 } },
+        { key = 'H', mods = 'CTRL|SHIFT|ALT|SUPER', action = act.AdjustPaneSize{ 'Left', 1 } },
+        { key = 'L', mods = 'CTRL|SHIFT|ALT|SUPER', action = act.AdjustPaneSize{ 'Right', 1 } },
+        { key = 'K', mods = 'CTRL|SHIFT|ALT|SUPER', action = act.AdjustPaneSize{ 'Up', 1 } },
+        { key = 'J', mods = 'CTRL|SHIFT|ALT|SUPER', action = act.AdjustPaneSize{ 'Down', 1 } },
 
         -- New panes 
         { key = 'Enter', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }, },

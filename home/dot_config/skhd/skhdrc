@@ -8,58 +8,21 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
-# swap managed window
-shift + alt - h : yabai -m window --swap west
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - l : yabai -m window --swap east
-
-# move managed window
-shift + alt + ctrl - h : yabai -m window --warp west
-shift + alt + ctrl - j : yabai -m window --warp south
-shift + alt + ctrl - k : yabai -m window --warp north
-shift + alt + ctrl - l : yabai -m window --warp east
-
-# Resize windows
-lctrl + alt - h : yabai -m window --resize left:-50:0; \
-                  yabai -m window --resize right:-50:0
-lctrl + alt - j : yabai -m window --resize bottom:0:50; \
-                  yabai -m window --resize top:0:50
-lctrl + alt - k : yabai -m window --resize top:0:-50; \
-                  yabai -m window --resize bottom:0:-50
-lctrl + alt - l : yabai -m window --resize right:50:0; \
-                  yabai -m window --resize left:50:0
-
-# equalize size of windows
-lctrl + alt - e : yabai -m space --balance
-
-# toggle padding and gap
-lctrl + alt - g : yabai -m space --toggle padding; \
-          yabai -m space --toggle gap
-
-# rotate tree clockwise and anticlockwise
-alt - r : yabai -m space --rotate 270
-shift + alt - r : yabai -m space --rotate 90
-
-# toggle window split type
-#alt - e : yabai -m window --toggle split
-
-# toggle window fullscreen zoom
-alt - f : yabai -m window --toggle zoom-fullscreen
-shift + alt - f : yabai -m window --toggle native-fullscreen
-
-# float / unfloat window and center on screen
-alt - t : yabai -m window --toggle float;\
-          yabai -m window --grid 4:4:1:1:2:2
-
-# toggle float and bsp layout
-shift + alt - s : yabai -m space --layout $(yabai -m query --spaces --space | jq -r 'if .type == "bsp" then "stack" else "bsp" end')
-# move up and down the stack
+# focus up and down in stack
 shift + alt - p : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.next || yabai -m window --focus stack.first); else yabai -m window --focus next || yabai -m window --focus first; fi
 shift + alt - n : if [ "$(yabai -m query --spaces --space | jq -r '.type')" = "stack" ]; then (yabai -m window --focus stack.prev || yabai -m window --focus stack.last); else yabai -m window --focus prev || yabai -m window --focus last; fi
 
-# Mission control
-shift + alt - m : yabai -m space --toggle mission-control
+# move managed window
+shift + alt - h : yabai -m window --warp west
+shift + alt - j : yabai -m window --warp south
+shift + alt - k : yabai -m window --warp north
+shift + alt - l : yabai -m window --warp east
+
+# swap managed window
+shift + alt + ctrl - h : yabai -m window --swap west
+shift + alt + ctrl - j : yabai -m window --swap south
+shift + alt + ctrl - k : yabai -m window --swap north
+shift + alt + ctrl - l : yabai -m window --swap east
 
 # move to next / prev space (requires SIP disabled)
 # alt - p : yabai -m space --focus next
@@ -87,11 +50,58 @@ shift + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7
 shift + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8
 shift + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
 
+# Switch layout to float on space
+shift + alt + ctrl - f : yabai -m space --layout float
+# Switch layout to bsp on space
+shift + alt + ctrl - b : yabai -m space --layout bsp
+# Switch layout to stack on space
+shift + alt + ctrl - s : yabai -m space --layout stack
+
+# toggle window split type
+alt - e : yabai -m window --toggle split
+
+# toggle window fullscreen zoom
+alt - f : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
+
+# toggle window flaot and center on screen
+alt - t : yabai -m window --toggle float;\
+          yabai -m window --grid 4:4:1:1:2:2
+
+# rotate tree clockwise and anticlockwise
+alt - r : yabai -m space --rotate 270
+shift + alt - r : yabai -m space --rotate 90
+
+# mirror tree y-axis
+alt - y : yabai -m space --mirror y-axis
+
+# mirror tree x-axis
+alt - x : yabai -m space --mirror x-axis
+
+# Resize windows (resizing uses ctrl + alt as modifier)
+lctrl + alt - h : yabai -m window --resize left:-50:0; \
+                  yabai -m window --resize right:-50:0
+lctrl + alt - j : yabai -m window --resize bottom:0:50; \
+                  yabai -m window --resize top:0:50
+lctrl + alt - k : yabai -m window --resize top:0:-50; \
+                  yabai -m window --resize bottom:0:-50
+lctrl + alt - l : yabai -m window --resize right:50:0; \
+                  yabai -m window --resize left:50:0
+
+# equalize size of windows
+lctrl + alt - e : yabai -m space --balance
+
+# toggle padding and gap
+lctrl + alt - g : yabai -m space --toggle padding; \
+          yabai -m space --toggle gap
+
+# Mission control
+alt - d : yabai -m space --toggle mission-control
+
 # restart yabai
 shift + alt + lctrl - r : yabai --restart-service
 
 ### APPLICATION KEYBINDS ###
-
 # Terminal
 alt - return : open -n /Applications/WezTerm.app 
 
@@ -101,6 +111,3 @@ shift + alt - b : open -n /Applications/Google\ Chrome.app
 
 # Chat
 alt - m : open /Applications/WhatsApp.app
-
-# Obsidian
-alt - o : open /Applications/Obsidian.app
