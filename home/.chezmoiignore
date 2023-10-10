@@ -3,6 +3,8 @@
 .chezmoiscripts/darwin/**
 .config/karabiner
 .config/amethyst
+.config/yabai
+.config/skhd
 {{ end }}
 
 {{ if ne .chezmoi.os "linux" }}
