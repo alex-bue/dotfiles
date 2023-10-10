@@ -10,13 +10,12 @@ yabai -m config window_placement             second_child
 yabai -m config window_origin_display        default
 
 ### WINDOW SETTINGS
-yabai -m config window_shadow                on
-yabai -m config window_border                on
-yabai -m config window_border_width          3
-#yabai -m config active_window_border_color   0xFF00FFFF # For Bright Cyan
-yabai -m config active_window_border_color   0xFFECEFF4 # Nord White
-yabai -m config normal_window_border_color   0xFF606060 # For Soft Gray
-yabai -m config insert_feedback_color        0xFF3B4252 # For Muted Blue
+# yabai -m config window_shadow                on
+# yabai -m config window_border                on
+# yabai -m config window_border_width          3
+# yabai -m config active_window_border_color   0xFFECEFF4 # Nord White
+# yabai -m config normal_window_border_color   0xFF606060 # For Soft Gray
+# yabai -m config insert_feedback_color        0xFF3B4252 # For Muted Blue
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
 
