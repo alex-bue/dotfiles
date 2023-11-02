@@ -5,11 +5,16 @@ let maplocalleader = "\<Space>"
 
 """ PLUGIN LOAD AND SETUP
 " auto-install vim-plug
-if ! filereadable(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim"'))
-	echo "Downloading junegunn/vim-plug to manage plugins..."
-	silent !mkdir -p ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/autoload/plug.vim
-	autocmd VimEnter * PlugInstall
+let plug_vim = $XDG_CONFIG_HOME . '/nvim/autoload/plug.vim'
+if empty($XDG_CONFIG_HOME)
+  let plug_vim = $HOME . '/.config/nvim/autoload/plug.vim'
+endif
+
+if !filereadable(plug_vim)
+  echo "Downloading junegunn/vim-plug to manage plugins..."
+  silent !mkdir -p $HOME/.config/nvim/autoload/
+  silent execute '!curl -fLo ' . shellescape(plug_vim) . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"'))
