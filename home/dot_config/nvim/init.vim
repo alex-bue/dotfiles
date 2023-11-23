@@ -57,7 +57,6 @@ set noshowcmd
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set nohls
 set nowrap
 
 filetype plugin on
