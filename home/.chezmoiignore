@@ -11,3 +11,6 @@
 .chezmoiscripts/linux/**
 .local/share/fonts
 {{ end }}
+
+# Ignore old nvim configuration
+.config/nvim/init.vim
