@@ -6,7 +6,7 @@ set -euoE pipefail
 cwd="$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd)"
 
 source="https://github.com/alex-bue/dotfiles"
-branch="${branch:-dev}"
+branch="${branch:-main}"
 tarball="$source/tarball/$branch"
 target="/tmp/.dotfiles"
 tar_cmd="tar -xzv -C $target --strip-components=1 --exclude='{.gitignore}'"

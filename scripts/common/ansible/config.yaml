@@ -48,5 +48,5 @@ brew:
 
 dotfiles:
   repo: 'https://github.com/alex-bue/dotfiles'
-  branch: 'dev'
+  branch: 'main'
 
