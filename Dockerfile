@@ -9,6 +9,9 @@ RUN ln -snf "/usr/share/zoneinfo/$TIMEZONE" /etc/localtime && \
 
 ENV DOCKERIZED true
 
+# Install necessities
+RUN apt-get update && apt-get install -y git curl wget
+
 # Configure dotfiles or other setup tasks.
 COPY ./scripts/setup.sh /tmp/setup.sh
 RUN /tmp/setup.sh --all

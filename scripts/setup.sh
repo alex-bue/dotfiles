@@ -34,6 +34,7 @@ linux() { test "$(uname -s)" == "Linux"  && return 0; }
 is_executable() { type "$1" > /dev/null 2>&1; }
 
 download_repository() {
+  cmd=""
   if is_executable "git"; then
     cmd="git clone -b $branch $source $target"
   elif is_executable "curl"; then
