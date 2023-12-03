@@ -7,7 +7,6 @@ packages:
   - wget
   - gh
   - htop
-  - lazygit
   - neofetch
   - tmux
   - tree

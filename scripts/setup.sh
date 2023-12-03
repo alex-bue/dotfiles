@@ -56,8 +56,8 @@ setup_all() {
   if linux; then
     "${target}/scripts/linux/install_dependencies.sh"
   fi
-  "${target}/scripts/macos/install_brew.sh"
   if macos; then
+    "${target}/scripts/macos/install_brew.sh"
     brew install ansible
   fi
   "${target}/scripts/common/ansible.sh" --all
