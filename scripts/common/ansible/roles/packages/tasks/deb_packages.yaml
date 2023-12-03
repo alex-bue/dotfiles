@@ -12,7 +12,7 @@
   get_url:
     url: "https://github.com/wez/wezterm/releases/download/20230712-072601-f4abf8fd/wezterm-20230712-072601-f4abf8fd.Ubuntu22.04.deb"
     dest: "/tmp/wezterm.deb"
-  when: ansible_distribution == 'Debian' and ansible_distribution_version == '22.04'
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '22.04'
 
 - name: Install WezTerm from .deb package
   become: true
