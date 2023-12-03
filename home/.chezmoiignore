@@ -11,5 +11,8 @@
 .chezmoiscripts/linux/**
 {{ end }}
 
+# TODO: Find better way to exclude ssh deployment through 1Password during initial apply
+.ssh
+
 # Ignore old nvim configuration
 .config/nvim/init.vim
