@@ -2,7 +2,7 @@
 
 - name: "packages | list"
   ansible.builtin.debug:
-    msg: "{{ packages }}"
+    msg: "{{ apt_packages }}"
   when: packages is defined
 
 - name: "apt | update"
@@ -14,7 +14,7 @@
 - name: "packages | install"
   become: true
   ansible.builtin.package:
-    name: "{{ packages }}"
+    name: "{{ apt_packages }}"
     state: present
   when: packages is defined
 

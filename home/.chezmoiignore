@@ -9,7 +9,6 @@
 
 {{ if ne .chezmoi.os "linux" }}
 .chezmoiscripts/linux/**
-.local/share/fonts
 {{ end }}
 
 # Ignore old nvim configuration
