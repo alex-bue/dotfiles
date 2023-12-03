@@ -16,8 +16,7 @@ RUN apt-get update && apt-get install -y sudo software-properties-common git cur
 RUN useradd -m user && \
     echo "user:user" | chpasswd && \
     adduser user sudo
-
-# Switch to the new user
+RUN echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER user
 WORKDIR /home/user
 
