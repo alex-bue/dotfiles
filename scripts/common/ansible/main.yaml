@@ -10,6 +10,9 @@
     - name: packages
       tags: packages
 
+    - name: dotfiles
+      tags: dotfiles
+
     - name: zsh
       tags: zsh
 
