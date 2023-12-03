@@ -7,4 +7,4 @@
   when: ansible_os_family == "Debian"
 
 - import_tasks: deb_packages.yaml
-  when: (ansible_distribution == 'Debian' and ansible_distribution_version == '20.04') or (ansible_distribution == 'Debian' and ansible_distribution_version == '22.04')
+  when: (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04') or (ansible_distribution == 'Ubuntu' and ansible_distribution_version == '22.04')
