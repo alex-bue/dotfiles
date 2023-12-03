@@ -45,3 +45,8 @@ brew:
     - ripgrep
     - wget
     - yabai
+
+dotfiles:
+  repo: 'https://github.com/alex-bue/dotfiles'
+  branch: 'dev'
+
