@@ -1,0 +1,17 @@
+---
+- hosts: 127.0.0.1
+  strategy: linear
+  connection: local
+
+  vars_files:
+    - config.yaml
+
+  roles:
+    - name: packages
+      tags: packages
+
+    - name: zsh
+      tags: zsh
+
+    - name: neovim
+      tags: neovim

@@ -1,0 +1,30 @@
+---
+
+- name: "brew | list packages"
+  ansible.builtin.debug:
+    msg: "{{ brew.formulae }}"
+  when: brew.formulae is defined
+
+- name: "brew | update"
+  community.general.homebrew:
+    update_homebrew: true
+
+- name: "brew | install taps"
+  community.general.homebrew_tap:
+    name: "{{ brew.taps }}"
+    state: present
+  when: brew.taps is defined
+
+- name: "brew | install casks"
+  community.general.homebrew_cask:
+    name: "{{ brew.casks }}"
+    state: present
+    install_options: no-quarantine
+    accept_external_apps: true
+  when: brew.casks is defined
+
+- name: "brew | install formulae"
+  community.general.homebrew:
+    name: "{{ brew.formulae }}"
+  when: brew.formulae is defined
+

@@ -1,0 +1,48 @@
+---
+
+packages:
+  - bat
+  - build-essential
+  - curl
+  - wget
+  - gh
+  - htop
+  - lazygit
+  - neofetch
+  - tmux
+  - tree
+  - ripgrep
+  - vim
+
+brew:
+  taps:
+    - homebrew/bundle
+    - homebrew/cask
+    - homebrew/cask-fonts
+    - homebrew/core
+
+  casks:
+    - 1password
+    - 1password-cli
+    - alfred
+    - google-chrome
+    - hiddenbar
+    - karabiner-elements
+    - wezterm
+
+  formulae:
+    - awscli
+    - bat
+    - curl
+    - ffmpeg
+    - fzf
+    - gh
+    - htop
+    - lazygit
+    - neofetch
+    - skhd
+    - tmux
+    - tree
+    - ripgrep
+    - wget
+    - yabai

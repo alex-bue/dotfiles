@@ -1,0 +1,29 @@
+---
+
+- name: "install"
+  community.general.homebrew:
+    name: zsh
+  when: ansible_os_family == "Darwin"
+  tags: homebrew
+
+- name: "install"
+  become: true
+  ansible.builtin.apt:
+    name: zsh
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- block:
+  - name: "obtain path to zsh"
+    ansible.builtin.command: which zsh
+    register: zsh_path
+    changed_when: false
+
+  - name: "change default shell to zsh"
+    become: true
+    ansible.builtin.user:
+      name: '{{ ansible_user }}'
+      shell: '{{ zsh_path.stdout }}'
+
+  tags: zsh_chsh
