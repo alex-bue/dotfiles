@@ -57,7 +57,7 @@
     version: HEAD
 
 # fzf
-- name: "clone fzf from github"
+- name: "fetch fzf from github"
   git:
     repo: 'https://github.com/junegunn/fzf.git'
     dest: /tmp/fzf/
