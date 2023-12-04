@@ -28,4 +28,4 @@ jobs:
         context: .
         file: Dockerfile
         push: true
-        tags: alex-bue/dotfiles:latest
+        tags: alexbue/dotfiles:latest
