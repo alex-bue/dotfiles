@@ -1,6 +1,7 @@
 ---
 
-  # TODO: make build from source platforms independent
+# TODO: make build from source platforms independent
+# TODO  change to appimage or some better solution to get newer version 
 - import_tasks: build.yaml
   when: neovim.build_from_source
 
