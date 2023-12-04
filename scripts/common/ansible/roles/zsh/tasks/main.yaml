@@ -60,11 +60,13 @@
 - name: "fetch fzf from github"
   git:
     repo: 'https://github.com/junegunn/fzf.git'
-    dest: /tmp/fzf/
+    dest: "{{ ansible_user_dir }}/.zsh_lugins/fzf"
     version: HEAD
 
 - name: "install fzf"
-  script: /tmp/fzf/install --key-bindings --completion --no-update-rc
+  ansible.builtin.shell:
+    cmd: "./install --key-bindings --completion --no-update-rc"
+    chdir: "{{ ansible_user_dir }}/.zsh_plugins/fzf"
 
 
 
