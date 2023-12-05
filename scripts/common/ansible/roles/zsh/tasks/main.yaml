@@ -29,44 +29,59 @@
   tags: zsh_chsh
 
 # PLUGINS
-- name: "create zsh_plugins directory"
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/zsh_plugins"
-    state: directory
-    mode: '0755'
+- block:
+    - name: "create zsh config dir"
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/zsh"
+        state: directory
+        mode: '0700'
 
-# Powerlevel10k
-- name: "clone powerlevel10k"
-  git:
-    repo: 'https://github.com/romkatv/powerlevel10k.git'
-    dest: "{{ ansible_user_dir }}/zsh_plugins/powerlevel10k"
-    version: HEAD
+    - name: "obtain path to zsh"
+      ansible.builtin.command: which zsh
+      register: zsh_path
+      changed_when: false
+      check_mode: false
 
-# zsh-autosuggestions
-- name: "clone zsh-autosuggestions"
-  git:
-    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
-    dest: "{{ ansible_user_dir }}/zsh_plugins/zsh-autosuggestions"
-    version: HEAD
+    - name: "create zsh_plugins directory"
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins"
+        state: directory
+        mode: '0755'
 
-# zsh-syntax-highlighting
-- name: "clone zsh-syntax-highlighting"
-  git:
-    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-    dest: "{{ ansible_user_dir }}/zsh_plugins/zsh-syntax-highlighting"
-    version: HEAD
+    # Powerlevel10k
+    - name: "clone powerlevel10k"
+      git:
+        repo: 'https://github.com/romkatv/powerlevel10k.git'
+        dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/powerlevel10k"
+        version: HEAD
 
-# fzf
-- name: "fetch fzf from github"
-  git:
-    repo: 'https://github.com/junegunn/fzf.git'
-    dest: "{{ ansible_user_dir }}/zsh_plugins/fzf"
-    version: HEAD
+    # zsh-autosuggestions
+    - name: "clone zsh-autosuggestions"
+      git:
+        repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+        dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/zsh-autosuggestions"
+        version: HEAD
 
-- name: "install fzf"
-  ansible.builtin.shell:
-    cmd: "./install --key-bindings --completion --no-update-rc"
-    chdir: "{{ ansible_user_dir }}/zsh_plugins/fzf"
+    # zsh-syntax-highlighting
+    - name: "clone zsh-syntax-highlighting"
+      git:
+        repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+        dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/zsh-syntax-highlighting"
+        version: HEAD
+
+    # fzf
+    - name: "clone fzf"
+      git:
+        repo: 'https://github.com/junegunn/fzf.git'
+        dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/fzf"
+        version: HEAD
+
+    - name: "install fzf"
+      ansible.builtin.shell:
+        cmd: "./install --key-bindings --completion --no-update-rc"
+        chdir: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/fzf"
+
+  tags: zsh_config
 
 
 
