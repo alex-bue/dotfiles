@@ -37,6 +37,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Force link Python
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          brew link --overwrite python@3.12
+
       - name: Install using setup.sh
         run: |
           if [ "$RUNNER_OS" == "macOS" ]; then
