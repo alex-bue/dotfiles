@@ -3,7 +3,14 @@ name: Docker Build and Push
 on:
   push:
     branches:
-      - main
+      - 'main'
+    paths:
+      - 'home/**'
+      - 'scripts/**'
+      - '.github/workflows/macos.yaml'
+      - '!**.md'
+      - '!.github/mkdocs.yaml'
+      - '!docs/**'
 
 jobs:
   build-and-push:
