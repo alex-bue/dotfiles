@@ -57,6 +57,7 @@
         clone: true
         update: true
         force: true
+      failed_when: "'already exists and is not an empty directory' not in git_clone.stderr"
 
     # zsh-autosuggestions
     - name: "clone zsh-autosuggestions"
@@ -67,6 +68,7 @@
         clone: true
         update: true
         force: true
+      failed_when: "'already exists and is not an empty directory' not in git_clone.stderr"
 
     # zsh-syntax-highlighting
     - name: "clone zsh-syntax-highlighting"
@@ -76,7 +78,7 @@
         version: HEAD
         clone: true
         update: true
-        force: true
+      failed_when: "'already exists and is not an empty directory' not in git_clone.stderr"
 
     # fzf
     - name: "clone fzf"
@@ -87,6 +89,7 @@
         clone: true
         update: true
         force: true
+      failed_when: "'already exists and is not an empty directory' not in git_clone.stderr"
 
     - name: "install fzf"
       ansible.builtin.shell:
