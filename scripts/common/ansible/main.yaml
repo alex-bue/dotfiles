@@ -10,8 +10,8 @@
     - name: packages
       tags: packages
 
-    # - name: fonts
-    #   tags: fonts
+    - name: fonts
+      tags: fonts
 
     - name: dotfiles
       tags: dotfiles
