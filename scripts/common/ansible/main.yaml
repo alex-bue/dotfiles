@@ -10,6 +10,9 @@
     - name: packages
       tags: packages
 
+    # - name: fonts
+    #   tags: fonts
+
     - name: dotfiles
       tags: dotfiles
 
@@ -18,3 +21,6 @@
 
     - name: neovim
       tags: neovim
+
+    - name: system_defaults
+      tags: system_defaults
