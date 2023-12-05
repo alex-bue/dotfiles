@@ -40,7 +40,11 @@ jobs:
       # This step removes pre-existing Python versions that might conflict.
       - name: Remove existing Python binaries
         run: |
-          rm -f '/usr/local/bin/2to3-3.12'
+          sudo rm -f /usr/local/bin/2to3-3.12
+          sudo rm -f /usr/local/bin/idle3.12
+          sudo rm -f /usr/local/bin/pydoc3.12
+          sudo rm -f /usr/local/bin/python3.12
+          sudo rm -f /usr/local/bin/python3.12-config
 
       - name: Install using setup.sh
         run: |
