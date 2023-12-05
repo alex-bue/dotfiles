@@ -39,12 +39,12 @@ brew:
     - htop
     - lazygit
     - neofetch
-    - skhd
+    - koekeishiya/formulae/skhd
     - tmux
     - tree
     - ripgrep
     - wget
-    - yabai
+    - koekeishiya/formulae/yabai
 
 dotfiles:
   repo: 'https://github.com/alex-bue/dotfiles'
