@@ -1,4 +1,4 @@
-name: Docker Build and Push
+name: docker
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     paths:
       - 'home/**'
       - 'scripts/**'
-      - '.github/workflows/docker-build.yaml'
+      - '.github/workflows/docker.yaml'
       - '!**.md'
       - '!.github/mkdocs.yaml'
       - '!docs/**'
