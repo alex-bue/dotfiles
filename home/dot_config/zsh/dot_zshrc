@@ -1,5 +1,5 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-[ -f "$HOME/.zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme" ] && source "$HOME/.zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme"
+[ -f "$ZDOTDIR/zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme" ] && source "$ZDOTDIR/zsh_plugins/powerlevel10k/powerlevel10k.zsh-theme"
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -98,8 +98,8 @@ fi
 
 # SOURCE PLUGINS
 # Enable Autosuggestions
-[ -f "$HOME/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$HOME/.zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$ZDOTDIR/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZDOTDIR/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Enable Syntax Highlighting
-[ -f "$HOME/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/.zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$ZDOTDIR/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$ZDOTDIR/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 

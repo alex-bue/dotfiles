@@ -1,17 +1,22 @@
 #!/bin/zsh
 
-# Export Environment Variable #
+# Set zsh config location
+export ZDOTDIR=$HOME/.config/zsh
 
-# ensure path is correct
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
+# Set zsh history location
+export HISTFILE="$ZDOTDIR/.zsh_history"
+export HISTSIZE=100000                   # Maximum events for internal history
+export SAVEHIST=100000                   # Maximum events in history file
 
+# set xdg paths
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 
 # editor
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-# zsh
-export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=100000                   # Maximum events for internal history
-export SAVEHIST=100000                   # Maximum events in history file
+# add user installed binary locations to path
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
