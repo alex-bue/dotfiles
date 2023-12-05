@@ -52,6 +52,9 @@ download_repository() {
 }
 
 setup_all() {
+  # Remove the /tmp/.dotfiles directory if it exists
+  [ -d "$target" ] && rm -rf "$target"
+
   test -d "$target" || download_repository
   if linux; then
     "${target}/scripts/linux/install_dependencies.sh"
