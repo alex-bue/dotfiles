@@ -26,8 +26,8 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
-# LOAD ALIASES AND SHORTCUTS (if existent).
-[ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
+# LOAD ALIASES AND SHORTCUTS (if existent)
+[ -f "$ZDOTDIR/.aliases" ] && source "$ZDOTDIR/.aliases"
 
 # COMPLETION
 autoload -Uz compinit 
