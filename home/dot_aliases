@@ -11,10 +11,20 @@ alias \
 	mkdir="mkdir -pv" \
 	bc="bc -ql" \
 
-# more neat shortcuts for basic commands
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+if command -v exa >/dev/null; then
+    alias l="exa --icons"
+    alias ls="exa --git --icons"
+    alias la="exa --git -a --icons"
+    alias ll="exa -lab --git --icons"
+    alias tree="exa --tree --icons"
+else
+    alias l="ls"
+    alias la="ls -a"
+    alias ll="ls -al"
+fi
+
+# chezmoi
+alias d="chezmoi cd"
 
 # Git aliases (WIP cherrypicked from oh-my-zsh plugin)
 alias ga="git add"
@@ -39,18 +49,3 @@ alias gst="git status"
 alias glog='git log --oneline --decorate --graph'
 alias glol="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias glols="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'"
-
-# QMK
-alias keymap="cd $HOME/Projects/qmk_firmware/keyboards/planck/keymaps/alex-bue"
-
-# Quickly edit config files in vim
-alias vimconfig="vim $HOME/.config/nvim/init.vim"
-alias zshconfig="vim $HOME/.zshrc"
-alias aliasconfig="vim $HOME/.aliases"
-
-# Reload shell
-alias reload="source $HOME/.zshrc"
-
-# Website shortcuts
-alias overleaf="open https://www.overleaf.com/project"
-
