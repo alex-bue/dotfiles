@@ -13,6 +13,10 @@ Install everything with single `curl` command:
 curl -fsSL https://raw.githubusercontent.com/alex-bue/dotfiles/main/scripts/setup.sh | sh -s -- --all
 ```
 
+## macOS Requirements
+
+Command Line Tools (CLT) for Xcode (from `xcode-select --install`)
+
 ## Running Inside Docker
 
 Run `docker run -it alexbue/dotfiles` to spawn a docker container which is
@@ -61,9 +65,10 @@ GitHub Actions.
                       │
      ┌────────────────┘
      │                 ┌────────────────────────┐
-     │  ┌──────┐       │ brew install <packages>│
-     ├─►│common├──────►│ brew install <casks>   │
-     │  └──────┘       └────────────────────────┘
+     │  ┌────────┐     │ brew install <casks>   │
+     ├─►│packages├────►│ brew install <formuale>│
+     │  └────────┘     │ apt install <packages> │
+     │                 └────────────────────────┘
      │
      │  ┌───────┐
      ├─►│ fonts │
@@ -110,4 +115,4 @@ GitHub Actions.
 
 ## Credits
 
-Many thanks to @shmileee whose dotfiles repository I basically copied and adjusted to my needs!
+Many thanks to [@shmileee](https://github.com/shmileee/dotfiles/) for the [Hitchhiker's Guide to the Dotfiles](https://oponomarov.com/) from which I derived my version.
