@@ -1,15 +1,14 @@
 #!/bin/sh
 
-# Use neovim for vim if present.
+# use neovim for vim if present
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-# Verbosity and settings that you pretty much just always are going to want.
-alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -vi" \
-	mkdir="mkdir -pv" \
-	bc="bc -ql" \
+# verbosity and settings that you pretty much just always are going to want.
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -iv"
+alias mkdir="mkdir -pv"
+alias bc="bc -ql"
 
 if command -v exa >/dev/null; then
     alias l="exa --icons"
@@ -26,7 +25,10 @@ fi
 # chezmoi
 alias d="chezmoi cd"
 
-# Git aliases (WIP cherrypicked from oh-my-zsh plugin)
+# reload shell
+alias reload="source $ZDOTDIR/.zshrc"
+
+# git aliases (cherrypicked from oh-my-zsh plugin)
 alias ga="git add"
 alias gaa="git add --all"
 alias gau="git add --update"
