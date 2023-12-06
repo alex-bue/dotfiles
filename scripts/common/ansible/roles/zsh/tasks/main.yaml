@@ -50,40 +50,37 @@
 
     # Powerlevel10k
     - name: "clone powerlevel10k"
-      git:
+      ansible.builtin.git:
         repo: 'https://github.com/romkatv/powerlevel10k.git'
         dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/powerlevel10k"
-        version: HEAD
+        depth: 1
         clone: true
         update: true
         force: true
 
     # zsh-autosuggestions
     - name: "clone zsh-autosuggestions"
-      git:
+      ansible.builtin.git:
         repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
         dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/zsh-autosuggestions"
-        version: HEAD
         clone: true
         update: true
         force: true
 
     # zsh-syntax-highlighting
     - name: "clone zsh-syntax-highlighting"
-      git:
+      ansible.builtin.git:
         repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
         dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/zsh-syntax-highlighting"
-        version: HEAD
         clone: true
         update: true
         force: true
 
     # fzf
     - name: "clone fzf"
-      git:
+      ansible.builtin.git:
         repo: 'https://github.com/junegunn/fzf.git'
         dest: "{{ ansible_user_dir }}/.config/zsh/zsh_plugins/fzf"
-        version: HEAD
         clone: true
         update: true
         force: true
