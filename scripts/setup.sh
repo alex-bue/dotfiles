@@ -9,6 +9,7 @@ source="https://github.com/alex-bue/dotfiles"
 branch="${branch:-main}"
 tarball="$source/tarball/$branch"
 target="/tmp/.dotfiles"
+trap 'rm -rf -- "$target"' EXIT # exit handler to clean up dir when script exits
 tar_cmd="tar -xzv -C $target --strip-components=1 --exclude='{.gitignore}'"
 
 
