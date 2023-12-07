@@ -1,11 +1,22 @@
+{{/* boolean feature tags */}}
+{{- $personal := false -}}
+
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
 {{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{- $hostname := .chezmoi.hostname -}}
+
+{{- if eq $hostname "mbp2018-ab" -}}
+{{-   $personal = true -}}
 {{- end -}}
 
 {{- $email := "alibue@hotmail.de" -}}
 
 [data]
     email = {{ $email | quote }}
+    hostname = {{ $hostname | quote }}
     osid = {{ $osID | quote }}
+    personal = {{ $personal }}
     onepasswordAccount = "H2ZCWQFNFFDVDFOES4WMUJ5VA4"
