@@ -30,5 +30,5 @@ compinit -C
 _comp_options+=(globdots)       # Complete hidden(dot)files
 
 # Load external programs / configs
-[ -f "$HOME/.p10k.zsh" ] && source "$HOME/.p10k.zsh" # load powerlevel10k config
+[ -f "$ZDOTDIR/.p10k.zsh" ] && source "$ZDOTDIR/.p10k.zsh" # load powerlevel10k config
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh" # load fzf
