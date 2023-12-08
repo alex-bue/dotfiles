@@ -115,4 +115,4 @@ GitHub Actions.
 
 ## Credits
 
-Many thanks to [@shmileee](https://github.com/shmileee/dotfiles/) for the [Hitchhiker's Guide to the Dotfiles](https://oponomarov.com/) from which I derived my version.
+Many thanks to [@shmileee](https://github.com/shmileee) for the [Hitchhiker's Guide to the Dotfiles](https://oponomarov.com) from which I derived my version.
