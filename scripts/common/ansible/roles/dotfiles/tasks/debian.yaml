@@ -1,6 +1,6 @@
 ---
 
-- name: Install Chezmoi
+- name: "install chezmoi"
   become: true
   shell: |
     sh -c "$(curl -fsLS get.chezmoi.io)" -- -b /usr/local/bin
