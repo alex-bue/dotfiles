@@ -14,6 +14,6 @@
     creates: "{{ ansible_user_dir }}/.local/share/chezmoi"
 
 - name: "chezmoi update"
-  ansible.builtin.command: chezmoi update --force
+  ansible.builtin.command: chezmoi update --verbose --force
   register: chezmoi_update
   changed_when: '"Updating" in chezmoi_update.stderr'
