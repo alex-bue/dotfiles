@@ -24,9 +24,17 @@ brew:
     - 1password
     - 1password-cli
     - alfred
+    - firefox
     - google-chrome
     - hiddenbar
+    - iina
     - karabiner-elements
+    - monitorcontrol
+    - notion
+    - obsidian
+    - onedrive
+    - pycharm
+    - spotify
     - wezterm
 
   formulae:
