@@ -15,9 +15,6 @@ bind -m vi-command "l":forward-char
 bind -m vi-command "j":history-search-forward
 bind -m vi-insert "^?":backward-delete-char
 
-# LOAD ALIASES AND SHORTCUTS (if existent).
-[ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
-
 # Load fzf (if the file exists)
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
