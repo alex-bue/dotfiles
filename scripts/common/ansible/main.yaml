@@ -22,5 +22,8 @@
     - name: neovim
       tags: neovim
 
+    - name: docker
+      tags: docker
+
     - name: system_defaults
       tags: system_defaults
