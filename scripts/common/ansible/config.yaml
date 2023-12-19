@@ -62,7 +62,7 @@ dotfiles:
 
 neovim:
   build_from_source: true
-  directory: "{{ ansible_user_dir }}/Development/repository/github.com/neovim/neovim"
+  directory: "{{ ansible_user_dir }}/dev/repository/github.com/neovim"
   build_dependencies:
     - autoconf
     - automake
