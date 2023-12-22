@@ -102,7 +102,7 @@ osx_global_defaults:
   - { name: "set a blazingly fast keyboard repeat rate", domain: NSGlobalDomain, key: KeyRepeat, type: int, value: 4 }
   # (e.g. enable Tab in modal dialogs)
   - { name: "enable full keyboard access for all controls", domain: NSGlobalDomain, key: AppleKeyboardUIMode, type: int, value: 3 }
-  - { name: "don't use natural scrolling", domain: NSGlobalDomain, key: com.apple.swipescrolldirection, type: bool, value: false }
+  - { name: "use natural scrolling", domain: NSGlobalDomain, key: com.apple.swipescrolldirection, type: bool, value: true }
 
   #########################################
   # Miscellaneous
