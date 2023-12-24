@@ -17,7 +17,6 @@ brew:
   taps:
     - homebrew/bundle
     - homebrew/cask-fonts
-    - homebrew/core
 
   casks:
     - 1password
