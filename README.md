@@ -24,6 +24,22 @@ automatically [built and
 pushed](https://github.com/alex-bue/dotfiles/actions/workflows/docker.yaml) with
 GitHub Actions.
 
+## Chezmoi
+
+Dotfiles themselves are managed with [chezmoi](https://github.com/twpayne/chezmoi).
+
+They can be installed with:
+
+```
+chezmoi init alex-bue
+```
+
+Personal secrets are stored in 1Password and you'll need the 1Password CLI installed. Login to 1Password with:
+
+```
+eval $(op signin)
+```
+
 ## Installation Flow
 ```
    ┌──────────────────────────────────────────────────────────────────────────────────────────────────────┐
