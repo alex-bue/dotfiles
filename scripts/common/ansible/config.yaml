@@ -41,6 +41,8 @@ brew:
     - awscli
     - bat
     - curl
+    - eza
+    - fd
     - ffmpeg
     - fzf
     - gh
