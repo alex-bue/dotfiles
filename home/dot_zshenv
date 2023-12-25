@@ -13,12 +13,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-# path
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"     # homebrew path on ARM systems
-export PATH="/usr/local/sbin:$PATH"       # homebrew's "sbin"
-
 # editor
 export EDITOR="nvim"
 export VISUAL="nvim"
