@@ -7,16 +7,12 @@ function module.apply_to_config(config)
     config.keys = {
 
         -- Move scrollback
+        { key = 'K', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1) },
+        { key = 'J', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1) },
         { key = 'U', mods = 'CTRL|SHIFT', action = act.ScrollByPage(-1) },
         { key = 'D', mods = 'CTRL|SHIFT', action = act.ScrollByPage(1) },
 
         -- Pane:
-        -- Move around panes
-        { key = 'H', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Left' },
-        { key = 'L', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Right' },
-        { key = 'K', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Up' },
-        { key = 'J', mods = 'CTRL|SHIFT', action = act.ActivatePaneDirection 'Down' },
-
         -- Rotate panes
         { key = 'J', mods = 'CTRL|SHIFT|SUPER', action = act.RotatePanes 'Clockwise' },
         { key = 'K', mods = 'CTRL|SHIFT|SUPER', action = act.RotatePanes 'CounterClockwise' },
