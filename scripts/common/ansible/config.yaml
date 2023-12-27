@@ -49,6 +49,7 @@ brew:
     - htop
     - lazygit
     - neofetch
+    - npm
     - koekeishiya/formulae/skhd
     - tmux
     - tree
