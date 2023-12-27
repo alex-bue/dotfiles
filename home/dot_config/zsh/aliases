@@ -26,6 +26,10 @@ fi
 # chezmoi
 alias d="chezmoi cd"
 
+# tmux
+alias ta="tmux attach"
+alias td="tmux detach"
+
 # reload shell
 alias reload="source $ZDOTDIR/.zshrc"
 
