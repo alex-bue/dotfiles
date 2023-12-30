@@ -110,4 +110,4 @@ alt - b : open /Applications/Google\ Chrome.app
 shift + alt - b : open -n /Applications/Google\ Chrome.app
 
 # Chat
-alt - m : open /Applications/WhatsApp.app
+alt - m : open ~/Applications/Chrome\ Apps.localized/WhatsApp\ Web.app
