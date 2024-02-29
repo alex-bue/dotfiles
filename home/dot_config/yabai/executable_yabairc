@@ -63,5 +63,6 @@ yabai -m rule --add app="^Activity Monitor.*$" manage=off
 yabai -m rule --add app="^About This Mac.*$" manage=off
 yabai -m rule --add app="^FortiClient.*$" manage=off
 yabai -m rule --add app="^Docker.*$" manage=off
+yabai -m rule --add app="^Session.*$" manage=off
 
 echo "yabai configuration loaded.."
