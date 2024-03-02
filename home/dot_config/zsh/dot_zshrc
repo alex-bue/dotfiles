@@ -13,4 +13,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # load plugins
 [ -f "$ZDOTDIR/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZDOTDIR/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -f "$ZDOTDIR/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$ZDOTDIR/zsh_plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+eval "$(zoxide init zsh)"
 
