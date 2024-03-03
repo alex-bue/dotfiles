@@ -3,3 +3,6 @@
 -- Add any additional options here
 
 vim.g.autoformat = false
+
+local opt = vim.opt
+opt.formatoptions = "jcrqlnt" -- disable auto comment after o or O
