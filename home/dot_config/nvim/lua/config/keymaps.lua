@@ -9,7 +9,15 @@ vim.keymap.set("n", "<leader>Ll", "<cmd>Lazy<cr>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>Lc", function() Util.news.changelog() end, { desc = "LazyVim Changelog" })
 
 -- obsidian.nvim
-vim.keymap.set("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>", { desc = "Paste Image in Obsidian" })
+vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Open note" })
+vim.keymap.set("n", "<leader>oO", "<cmd>ObsidianOpen<CR>", { desc = "Open note in obsidian" })
+vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "New note" })
+vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
+vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLink<CR>", { desc = "Link existing note" })
+vim.keymap.set("n", "<leader>oL", "<cmd>ObsidianLinkNew<CR>", { desc = "Create and link new note" })
+vim.keymap.set("n", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract selection to new note" })
+vim.keymap.set("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>", { desc = "Paste image" })
+vim.keymap.set("n", "<leader>oi", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
 
 -- vimtex
 vim.keymap.set("n", "<leader>li", "<plug>(vimtex-info)", { desc = "View Info" })
