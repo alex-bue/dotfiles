@@ -25,7 +25,28 @@ return {
     },
 
 
-    disable_frontmatter = true,
+    -- Default frontmatter 
+    disable_frontmatter = false,
+    note_frontmatter_func = function(note)
+      -- Start constructing the frontmatter table.
+      local out = {
+        aliases = note.aliases,
+        tags = note.tags,
+        created = os.date("%Y-%m-%d"),
+        moc = "[[]]", 
+      }
+
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- Merge those fields into the frontmatter, ensuring they are kept.
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+
+      return out
+    end,
+
 
     -- Set default notes directory
     notes_subdir = "01-zettelkasten",
@@ -44,6 +65,11 @@ return {
     },
 
     preferred_link_style = "wiki",
+
+    -- Open URL in default browser
+    follow_url_func = function(url)
+      vim.fn.jobstart({"open", url})
+    end,
 
     -- Prefix with timestamp
     image_name_func = function()
