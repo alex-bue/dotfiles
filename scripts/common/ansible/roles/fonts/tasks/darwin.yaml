@@ -7,7 +7,7 @@
   - name: "install fonts"
     community.general.homebrew_cask:
       name:
-        - font-jetbrains-mono
+        - font-jetbrains-mono-nerd-font
         - font-powerline-symbols
         - font-fira-code-nerd-font
       install_options: no-quarantine

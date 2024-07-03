@@ -19,6 +19,9 @@ vim.keymap.set("n", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extr
 vim.keymap.set("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>", { desc = "Paste image" })
 vim.keymap.set("n", "<leader>oi", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
 
+vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLink<CR>", { desc = "Link existing note" })
+vim.keymap.set("v", "<leader>oL", "<cmd>ObsidianLinkNew<CR>", { desc = "Create and link new note" })
+
 -- vimtex
 vim.keymap.set("n", "<leader>li", "<plug>(vimtex-info)", { desc = "View Info" })
 -- vim.keymap.set("n", "<leader>lI", "<plug>(vimtex-info-full)", { desc = "View Full Info" })
