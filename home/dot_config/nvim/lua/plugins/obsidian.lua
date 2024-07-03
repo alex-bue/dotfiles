@@ -14,7 +14,7 @@ return {
     -- Required.
     "nvim-lua/plenary.nvim",
 
-    -- see below for full list of optional dependencies 👇
+    -- see below for full list of optional dependencies
   },
   opts = {
     workspaces = {
@@ -33,7 +33,9 @@ return {
         aliases = note.aliases,
         tags = note.tags,
         created = os.date("%Y-%m-%d"),
-        moc = "[[]]", 
+        index = {
+          "[[]]",
+        },
       }
 
       -- `note.metadata` contains any manually added fields in the frontmatter.
