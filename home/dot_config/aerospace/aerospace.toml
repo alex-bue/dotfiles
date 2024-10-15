@@ -3,6 +3,7 @@
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = []
 
+
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
@@ -50,12 +51,12 @@ preset = 'qwerty'
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 0
-inner.vertical =   0
-outer.left =       0
-outer.bottom =     0
-outer.top =        0
-outer.right =      0
+inner.horizontal = 4
+inner.vertical =   4
+outer.left =       4
+outer.bottom =     4
+outer.top =        4
+outer.right =      4
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -150,7 +151,6 @@ alt-shift-l = ['join-with right', 'mode main']
 [mode.resize.binding]
 j = 'resize smart -50'
 k = 'resize smart +50'
-r = ['flatten-workspace-tree', 'mode main']
 enter = 'mode main'
 esc = 'mode main'
 
@@ -167,6 +167,6 @@ if.app-id = 'com.runningwithcrayons.Alfred-Preferences'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.valvesoftware.steam'
+if.app-id = 'com.bitwarden.desktop'
 run = 'layout floating'
 
