@@ -3,6 +3,9 @@
 # use neovim for vim if present
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
+# experimental kickstart nvim
+alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+
 # verbosity and settings that you pretty much just always are going to want.
 alias cp="cp -iv"
 alias mv="mv -iv"
