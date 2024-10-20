@@ -1,53 +1,62 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
+-- [[ Basic Keymaps ]]
+--  See `:help vim.keymap.set()`
 
--- change lazy keybinds
-local Util = require("lazyvim.util")
-vim.keymap.del("n", "<leader>l")
-vim.keymap.set("n", "<leader>Ll", "<cmd>Lazy<cr>", { desc = "Lazy" })
-vim.keymap.set("n", "<leader>Lc", function() Util.news.changelog() end, { desc = "LazyVim Changelog" })
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- obsidian.nvim
-vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Open note" })
-vim.keymap.set("n", "<leader>oO", "<cmd>ObsidianOpen<CR>", { desc = "Open note in obsidian" })
-vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "New note" })
-vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
-vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLink<CR>", { desc = "Link existing note" })
-vim.keymap.set("n", "<leader>oL", "<cmd>ObsidianLinkNew<CR>", { desc = "Create and link new note" })
-vim.keymap.set("n", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract selection to new note" })
-vim.keymap.set("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>", { desc = "Paste image" })
-vim.keymap.set("n", "<leader>oi", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
+-- Diagnostic keymaps
+vim.keymap.set("n", "<leader>xq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
-vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLink<CR>", { desc = "Link existing note" })
-vim.keymap.set("v", "<leader>oL", "<cmd>ObsidianLinkNew<CR>", { desc = "Create and link new note" })
+-- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
+-- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
+-- is not what someone will guess without a bit more experience.
+--
+-- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- or just use <C-\><C-n> to exit terminal mode
+vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- vimtex
-vim.keymap.set("n", "<leader>li", "<plug>(vimtex-info)", { desc = "View Info" })
--- vim.keymap.set("n", "<leader>lI", "<plug>(vimtex-info-full)", { desc = "View Full Info" })
-vim.keymap.set("n", "<leader>lt", "<plug>(vimtex-toc-open)", { desc = "Open Table of Contents" })
-vim.keymap.set("n", "<leader>lT", "<plug>(vimtex-toc-toggle)", { desc = "Toggle Table of Contents" })
-vim.keymap.set("n", "<leader>lq", "<plug>(vimtex-log)", { desc = "View Log" })
-vim.keymap.set("n", "<leader>lv", "<plug>(vimtex-view)", { desc = "View Compiled Document" })
-vim.keymap.set("n", "<leader>lr", "<plug>(vimtex-reverse-search)", { desc = "Reverse Search" })
-vim.keymap.set("n", "<leader>ll", "<plug>(vimtex-compile)", { desc = "Compile" })
--- vim.keymap.set("n", "<leader>lL", "<plug>(vimtex-compile-selected)", { desc = "Compile Selected" })
-vim.keymap.set("n", "<leader>lk", "<plug>(vimtex-stop)", { desc = "Stop Compilation" })
--- vim.keymap.set("n", "<leader>lK", "<plug>(vimtex-stop-all)", { desc = "Stop All Compilation" })
-vim.keymap.set("n", "<leader>le", "<plug>(vimtex-errors)", { desc = "View Errors" })
-vim.keymap.set("n", "<leader>lo", "<plug>(vimtex-compile-output)", { desc = "View Compile Output" })
-vim.keymap.set("n", "<leader>lg", "<plug>(vimtex-status)", { desc = "View Status" })
--- vim.keymap.set("n", "<leader>lG", "<plug>(vimtex-status-all)", { desc = "View Status (All)" })
-vim.keymap.set("n", "<leader>lc", "<plug>(vimtex-clean)", { desc = "Clean" })
-vim.keymap.set("n", "<leader>lC", "<plug>(vimtex-clean-full)", { desc = "Clean Full" })
--- vim.keymap.set("n", "<leader>lm", "<plug>(vimtex-imaps-list)", { desc = "List of Maps" })
--- vim.keymap.set("n", "<leader>lx", "<plug>(vimtex-reload)", { desc = "Reload" })
--- vim.keymap.set("n", "<leader>lX", "<plug>(vimtex-reload-state)", { desc = "Reload State" })
-vim.keymap.set("n", "<leader>ls", "<plug>(vimtex-toggle-main)", { desc = "Toggle Main" })
-vim.keymap.set("n", "<leader>la", "<plug>(vimtex-context-menu)", { desc = "Context Menu" })
+-- Keybinds to make split navigation easier.
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
+-- Move Lines
+vim.keymap.set("n", "<C-A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
+vim.keymap.set("n", "<C-A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
+vim.keymap.set("i", "<C-A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move Down" })
+vim.keymap.set("i", "<C-A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move Up" })
+vim.keymap.set("v", "<C-A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })
+vim.keymap.set("v", "<C-A-k>", ":m '<-2<cr>gv=gv", { desc = "Move Up" })
 
--- to adjust which-key configuration
-require("config/which-key")
+-- buffers
+vim.keymap.set("n", "<leader>bd", "<cmd>:bd<cr>", { desc = "Delete Buffer" })
+vim.keymap.set("n", "<leader>bD", "<cmd>:bd!<cr>", { desc = "Delete Buffer (force)" })
 
+-- save file
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
+-- new file
+vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- quit vim
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+-- Toggles
+-- line wrapping
+local function toggle_wrap()
+	if vim.wo.wrap then
+		vim.wo.wrap = false
+		print("Line wrap: OFF")
+	else
+		vim.wo.wrap = true
+		print("Line wrap: ON")
+	end
+end
+vim.keymap.set("n", "<leader>tw", toggle_wrap, { noremap = true, silent = true, desc = "Toggle line wrap" })
+
+-- TODO: toggle relatives line
+-- TODO: toggle line numbers
+-- TODO: toggle spelling
