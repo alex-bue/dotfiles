@@ -1,20 +1,15 @@
-
 {{ if ne .chezmoi.os "darwin" }}
-.chezmoiscripts/darwin/**
 .config/karabiner
-.config/amethyst
+.config/aerospace
+{{ end }}
+
+# Currently not used at all (potentially delete yabai and skhd)
+.bashrc
 .config/yabai
 .config/skhd
-{{ end }}
 
-{{ if ne .chezmoi.os "linux" }}
-.chezmoiscripts/linux/**
-{{ end }}
-
-{{ if ne .chezmoi.os "windows" }}
-.chezmoiscripts/windows/**
-{{ else }}
-*
-{{ end }}
-
-.bashrc
+# Other repo contents
+.github/
+install.sh
+LICENSE
+README.md
