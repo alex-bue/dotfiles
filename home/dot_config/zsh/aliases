@@ -3,9 +3,6 @@
 # use neovim for vim if present
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
 
-# experimental kickstart nvim
-alias lazyvim='NVIM_APPNAME="lazyvim" nvim'
-
 # verbosity and settings that you pretty much just always are going to want.
 alias cp="cp -iv"
 alias mv="mv -iv"

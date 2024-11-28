@@ -1,14 +1,19 @@
-# load modules
-[ -f "$ZDOTDIR/init" ] && source "$ZDOTDIR/init"
-[ -f "$ZDOTDIR/keybinds" ] && source "$ZDOTDIR/keybinds"
-[ -f "$ZDOTDIR/aliases" ] && source "$ZDOTDIR/aliases"
-
 # export path variables
 export PATH="/opt/homebrew/bin:$PATH"     # homebrew's "bin" on ARM
 export PATH="/opt/homebrew/sbin:$PATH"    # homebrew's "sbin" on ARM
 export PATH="/usr/local/sbin:$PATH"       # homebrew's "sbin" on x86
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+
+# editor
+export NVIM_APPNAME="lazyvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# load modules
+[ -f "$ZDOTDIR/init" ] && source "$ZDOTDIR/init"
+[ -f "$ZDOTDIR/keybinds" ] && source "$ZDOTDIR/keybinds"
+[ -f "$ZDOTDIR/aliases" ] && source "$ZDOTDIR/aliases"
 
 # load plugins
 [ -f "$ZDOTDIR/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$ZDOTDIR/zsh_plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
