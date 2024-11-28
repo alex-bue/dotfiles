@@ -1,5 +1,6 @@
 {{/* boolean feature tags */}}
 {{- $personal := false -}}
+{{- $interactive := stdinIsATTY -}}
 
 {{- $osID := .chezmoi.os -}}
 {{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
@@ -14,8 +15,8 @@
 
 {{- $email := "alibue@hotmail.de" -}}
 
-[data]
-    email = {{ $email | quote }}
-    hostname = {{ $hostname | quote }}
-    osid = {{ $osID | quote }}
-    personal = {{ $personal }}
+data:
+  email: {{ $email | quote }}
+  hostname: {{ $hostname | quote }}
+  osid: {{ $osID | quote }}
+  personal: {{ $personal }}
