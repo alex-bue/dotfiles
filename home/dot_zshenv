@@ -13,3 +13,16 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
+# export path variables
+export PATH="/opt/homebrew/bin:$PATH"     # homebrew's "bin" on ARM
+export PATH="/opt/homebrew/sbin:$PATH"    # homebrew's "sbin" on ARM
+export PATH="/usr/local/sbin:$PATH"       # homebrew's "sbin" on x86
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+
+# editor
+export NVIM_APPNAME="lazyvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml # Starship config
+
