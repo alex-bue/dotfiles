@@ -36,38 +36,6 @@ function module.apply_to_config(config)
 		active_titlebar_bg = "#3B4252",
 		inactive_titlebar_bg = "#3B4252",
 	}
-
-	-- Tab bar colors (only work with nord color scheme)
-	config.colors = {
-		tab_bar = {
-			active_tab = {
-				bg_color = "#2E3440",
-				fg_color = "#ECEFF4",
-			},
-
-			inactive_tab = {
-				bg_color = "#3B4252",
-				fg_color = "#ECEFF4",
-			},
-
-			inactive_tab_hover = {
-				bg_color = "#2E3440",
-				fg_color = "#ECEFF4",
-			},
-
-			new_tab = {
-				bg_color = "#3B4252",
-				fg_color = "#ECEFF4",
-			},
-
-			new_tab_hover = {
-				bg_color = "#2E3440",
-				fg_color = "#ECEFF4",
-			},
-
-			inactive_tab_edge = "#ECEFF4",
-		},
-	}
 end
 
 return module

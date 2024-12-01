@@ -30,9 +30,6 @@ alias d="chezmoi cd"
 alias ta="tmux attach"
 alias td="tmux detach"
 
-# reload shell
-alias reload="source $ZDOTDIR/.zshrc"
-
 # git aliases (cherrypicked from oh-my-zsh plugin)
 alias ga="git add"
 alias gaa="git add --all"
