@@ -7,9 +7,15 @@ function module.apply_to_config(config)
 	config.color_scheme = "catppuccin-frappe"
 
 	-- Window
-  config.window_close_confirmation = "NeverPrompt"
+	config.window_close_confirmation = "NeverPrompt"
 	config.window_decorations = "TITLE | RESIZE"
 	config.window_background_opacity = 1
+	config.window_padding = {
+		left = "10px",
+		right = 0,
+		top = 0,
+		bottom = "4px",
+	}
 
 	-- Style inactive panes
 	config.inactive_pane_hsb = {
