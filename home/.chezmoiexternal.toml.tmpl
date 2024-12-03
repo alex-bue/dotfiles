@@ -4,3 +4,13 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+
+{{- if eq .osid "linux-ubuntu" }}
+
+[".local/bin/nvim"]
+    type = "file"
+    url = "https://github.com/neovim/neovim/releases/download/stable/nvim.appimage"
+    refreshPeriod = "672h"
+    executable = true
+
+{{- end }}
