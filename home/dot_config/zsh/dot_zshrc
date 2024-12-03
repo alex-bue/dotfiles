@@ -7,17 +7,17 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+# load modules
+[ -f "$ZDOTDIR/completions.zsh" ] && source "$ZDOTDIR/completions.zsh"
+[ -f "$ZDOTDIR/options.zsh" ] && source "$ZDOTDIR/options.zsh"
+[ -f "$ZDOTDIR/aliases.zsh" ] && source "$ZDOTDIR/aliases.zsh"
+[ -f "$ZDOTDIR/keybindings.zsh" ] && source "$ZDOTDIR/keybindings.zsh"
+
 # add zsh plugins
+zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-
-# load modules
-[ -f "$ZDOTDIR/options.zsh" ] && source "$ZDOTDIR/options.zsh"
-[ -f "$ZDOTDIR/completions.zsh" ] && source "$ZDOTDIR/completions.zsh"
-[ -f "$ZDOTDIR/aliases.zsh" ] && source "$ZDOTDIR/aliases.zsh"
-[ -f "$ZDOTDIR/keybindings.zsh" ] && source "$ZDOTDIR/keybindings.zsh"
 
 # editor and prompt config
 export NVIM_APPNAME="lazyvim"
@@ -27,5 +27,5 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml # Starship config
 
 # load programs
 eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
+eval "$(starship init zsh)"
