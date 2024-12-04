@@ -17,6 +17,7 @@ return {
     -- see below for full list of optional dependencies
   },
   keys = {
+    { "<leader>o", desc = "+obsidian" },
     { "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open note" },
     { "<leader>oO", "<cmd>ObsidianOpen<CR>", desc = "Open note in Obsidian" },
     { "<leader>on", "<cmd>ObsidianNew<CR>", desc = "New note" },
@@ -33,22 +34,26 @@ return {
     ui = { enable = false },
     workspaces = {
       {
-        name = "obsidian-vault",
-        path = "/Users/ab/Library/Mobile Documents/com~apple~CloudDocs/obsidian-vault",
+        name = "buf-parent",
+        path = function()
+          return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
+        end,
       },
     },
-
     -- Default frontmatter
     disable_frontmatter = false,
     note_frontmatter_func = function(note)
+      -- Add the title of the note as an alias.
+      if note.title then
+        note:add_alias(note.title)
+      end
+
       -- Start constructing the frontmatter table.
       local out = {
+        id = note.id,
         aliases = note.aliases,
         tags = note.tags,
-        created = os.date("%Y-%m-%d"),
-        index = {
-          "[[]]",
-        },
+        links = { "[[]]" },
       }
 
       -- `note.metadata` contains any manually added fields in the frontmatter.
@@ -67,11 +72,14 @@ return {
     new_notes_location = "notes_subdir",
 
     -- Option for ObsidianNew
+    ---@param title string|?
+    ---@return string
     note_id_func = function(title)
       if title == nil or title == "" then
         error("File name is required.")
       end
-      return title
+      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+      return tostring(os.time()) .. "-" .. suffix
     end,
 
     templates = {
