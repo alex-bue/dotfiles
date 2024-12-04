@@ -2,7 +2,7 @@
 autoload -U colors && colors	# Load colors
 
 # Enable history
-HISTFILE="~/.zsh_history"
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000                    # Maximum events for internal history
 SAVEHIST=5000                    # Maximum events in history file
 
