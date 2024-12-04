@@ -78,12 +78,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit cdreplay -q # apparently speeds completions loading up
 
-# editor and prompt config
-export NVIM_APPNAME="lazyvim"
-export EDITOR="nvim"
-export VISUAL="nvim"
-export STARSHIP_CONFIG=~/.config/starship/starship.toml # Starship config
-
 # load programs
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"

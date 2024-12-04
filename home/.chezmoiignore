@@ -4,9 +4,9 @@
 {{ end }}
 
 # Currently not used at all (potentially delete yabai and skhd)
-.bashrc
 .config/yabai
 .config/skhd
+.config/nvim-kickstart
 
 # Other repo contents
 .github/
