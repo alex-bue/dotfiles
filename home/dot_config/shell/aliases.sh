@@ -10,21 +10,23 @@ alias rm="rm -iv"
 alias mkdir="mkdir -pv"
 alias bc="bc -ql"
 
-# if command -v eza >/dev/null; then
-#     alias l="eza --icons"
-#     alias ls="eza --git --icons"
-#     alias la="eza --git -a --icons"
-#     alias ll="eza -lab --git --icons"
-#     alias tree="eza --tree --icons"
-# else
-#     alias l="ls --color=auto"
-#     alias ls="ls --color=auto"
-#     alias la="ls -la"
-#     alias ll="ls -al"
-# fi
-#
+if command -v eza >/dev/null; then
+  alias l="eza --icons"
+  alias ls="eza --git --icons"
+  alias la="eza --git -a --icons"
+  alias ll="eza -lab --git --icons"
+  alias tree="eza --tree --icons"
+else
+  alias l="ls --color=auto"
+  alias ls="ls --color=auto"
+  alias la="ls -la"
+  alias ll="ls -al"
+fi
+
 # chezmoi
 alias d="chezmoi cd"
+alias ca="chezmoi apply"
+alias ce="chezmoi edit"
 
 # tmux
 alias ta="tmux attach"

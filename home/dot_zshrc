@@ -1,14 +1,8 @@
 # Enable colors and change prompt:
 autoload -U colors && colors	# Load colors
 
-# install plugin manager (zinit)
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
-
-# opts
-HISTFILE="$ZDOTDIR/.zsh_history"
+# Enable history
+HISTFILE="~/.zsh_history"
 HISTSIZE=5000                    # Maximum events for internal history
 SAVEHIST=5000                    # Maximum events in history file
 
@@ -22,31 +16,67 @@ setopt hist_find_no_dups         # Do not display a previously found event.
 setopt hist_save_no_dups         # Do not write a duplicate event to the history file.
 setopt hist_verify               # Do not execute immediately upon history expansion.
 
-# completions
-autoload -Uz compinit && compinit
-
-zinit cdreplay -q
-
+# Configure completions
 zstyle ':completion:*' menu no                              # Disable zsh complete menus (because plugin handles them)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case insensitive completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Color the completions
+# _comp_options+=(globdots)       # Complete hidden(dot)files
+
+# Configure fzf-tab completions
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept' # Use tab as enter instead of going down the list
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # Use fzf tab for cd completions
 
-#TODO: Do I need these?
-# zmodload zsh/complist
-# compinit -C
-# _comp_options+=(globdots)       # Complete hidden(dot)files
+# Initialize completion system
+autoload -Uz compinit && compinit
+
+# enable and configure vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+bindkey '^H' backward-delete-char  # For ^H to work globally
+bindkey '^?' backward-delete-char  # For ^? to work globally
+
+# Use vim keys in tab complete menu (currently not needed because fzf is used)
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
+# bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Allow editing cli in nvim
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line # CTRL-E to edit cli prompt in NVIM
 
 # load modules
-[ -f "$ZDOTDIR/aliases.zsh" ] && source "$ZDOTDIR/aliases.zsh"
-[ -f "$ZDOTDIR/keybindings.zsh" ] && source "$ZDOTDIR/keybindings.zsh"
+source "$HOME/.config/shell/aliases.sh"
+
+# Install plugin manager (zinit)
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 # add zsh plugins
 zinit light Aloxaf/fzf-tab
-zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
+zinit cdreplay -q # apparently speeds completions loading up
 
 # editor and prompt config
 export NVIM_APPNAME="lazyvim"
