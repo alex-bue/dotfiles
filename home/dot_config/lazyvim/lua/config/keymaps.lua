@@ -7,6 +7,16 @@
 vim.keymap.del("n", "<leader>bb")
 vim.keymap.del("n", "<leader>`")
 
+-- tabs
+vim.keymap.del("n", "<leader><tab>l")
+vim.keymap.del("n", "<leader><tab>o")
+vim.keymap.del("n", "<leader><tab>f")
+vim.keymap.del("n", "<leader><tab><tab>")
+vim.keymap.del("n", "<leader><tab>]")
+vim.keymap.del("n", "<leader><tab>d")
+vim.keymap.del("n", "<leader><tab>[")
+
+-- Set my keybindings
 -- Move lines
 vim.keymap.set("n", "<C-A-j>", "<cmd>m .+1<cr>==", { desc = "Move Down" })
 vim.keymap.set("n", "<C-A-k>", "<cmd>m .-2<cr>==", { desc = "Move Up" })
