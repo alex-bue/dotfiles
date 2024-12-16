@@ -3,6 +3,9 @@
 -- Add any additional options here
 
 vim.g.autoformat = true
+vim.g.snacks_animate = false
 
 local opt = vim.opt
+
 opt.formatoptions = "jcrqlnt" -- disable auto comment after o or O
+opt.smoothscroll = false
