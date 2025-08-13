@@ -96,26 +96,22 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
 alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
-# Join operations
 alt-shift-ctrl-h = 'join-with left'
 alt-shift-ctrl-j = 'join-with down'
 alt-shift-ctrl-k = 'join-with up'
 alt-shift-ctrl-l = 'join-with right'
 
-# Moving between workspaces: See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3'
 alt-4 = 'workspace 4'
 alt-5 = 'workspace 5'
 
-# Moving focussed window to workspaces: See https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
@@ -127,26 +123,24 @@ alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 alt-shift-0 = 'balance-sizes'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+alt-n = 'focus-monitor --wrap-around next'
+alt-p = 'focus-monitor --wrap-around prev'
 
 # Mode changes: See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-r = 'mode resize'
 alt-shift-semicolon = 'mode service'
 
-# 'service' binding mode declaration.
-# See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
+[workspace-to-monitor-force-assignment]
+1 = 'secondary'
+
 [mode.service.binding]
 backspace = ['close-all-windows-but-current', 'mode main']
 r = ['reload-config', 'mode main']
 f = ['flatten-workspace-tree', 'mode main']
 enter = 'mode main'
 esc = 'mode main'
-
-# sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-#s = ['layout sticky tiling', 'mode main']
 
 h = ['join-with left', 'mode main']
 j = ['join-with down', 'mode main']
