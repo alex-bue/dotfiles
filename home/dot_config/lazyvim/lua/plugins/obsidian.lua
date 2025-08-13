@@ -3,6 +3,11 @@ return {
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
+
+  event = {
+    "BufReadPre /Users/ab/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/obsidian-vault/**.md",
+    "BufNewFile /Users/ab/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/obsidian-vault/**.md",
+  },
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   -- event = {
   --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
@@ -63,10 +68,8 @@ return {
     ui = { enable = false },
     workspaces = {
       {
-        name = "buf-parent",
-        path = function()
-          return assert(vim.fs.dirname(vim.api.nvim_buf_get_name(0)))
-        end,
+        name = "main",
+        path = "/Users/ab/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-vault",
       },
     },
 
@@ -103,22 +106,10 @@ return {
 
     -- Options for ObsidianPasteImg
     attachments = {
-      -- Default folder
       img_folder = "_attachments",
-
-      -- Output string format
       img_text_func = function(client, path)
-        local link_path_str
         local vault_relative_path = client:vault_relative_path(path)
-
-        if vault_relative_path ~= nil then
-          -- Convert the `obsidian.Path` object to a string
-          link_path_str = tostring(vault_relative_path)
-        else
-          -- If `vault_relative_path` is `nil`, convert the original `path` to a string
-          link_path_str = tostring(path)
-        end
-
+        local link_path_str = vault_relative_path and tostring(vault_relative_path) or tostring(path)
         local display_name = vim.fs.basename(link_path_str)
         return string.format("![[%s]]", display_name)
       end,
