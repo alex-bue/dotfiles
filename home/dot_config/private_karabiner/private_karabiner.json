@@ -115,6 +115,14 @@
                         "vendor_id": 12951
                     },
                     "ignore": true
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 24926,
+                        "vendor_id": 7504
+                    },
+                    "ignore": true
                 }
             ],
             "name": "standard-macbook",

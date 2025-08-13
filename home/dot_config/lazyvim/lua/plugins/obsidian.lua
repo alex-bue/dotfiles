@@ -1,5 +1,5 @@
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
@@ -10,24 +10,55 @@ return {
   --   "BufReadPre path/to/my-vault/**.md",
   --   "BufNewFile path/to/my-vault/**.md",
   -- },
-  dependencies = {
-    -- Required.
-    "nvim-lua/plenary.nvim",
+  dependencies = { "folke/which-key.nvim" },
 
-    -- see below for full list of optional dependencies
-  },
+  -- which-key groups (kept close to the plugin)
+  init = function()
+    local ok, wk = pcall(require, "which-key")
+    if ok then
+      wk.add({
+        { "<leader>o", group = "obsidian", mode = { "n", "x" } },
+        { "<leader>of", group = "file", mode = { "n", "x" } },
+        { "<leader>oi", group = "insert", mode = { "n", "x" } },
+        { "<leader>os", group = "search", mode = { "n", "x" } },
+      })
+    end
+  end,
+
   keys = {
+    -- top-level
     { "<leader>o", desc = "+obsidian" },
-    { "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", desc = "Open note" },
-    { "<leader>oO", "<cmd>ObsidianOpen<CR>", desc = "Open note in Obsidian" },
-    { "<leader>on", "<cmd>ObsidianNew<CR>", desc = "New note" },
-    { "<leader>os", "<cmd>ObsidianSearch<CR>", desc = "Search notes" },
-    { "<leader>op", "<cmd>ObsidianPasteImg<CR>", desc = "Paste image" },
-    { "<leader>oi", "<cmd>ObsidianTemplate<CR>", desc = "Insert template" },
-    { "<leader>oe", ":ObsidianExtractNote<CR>", mode = { "x" }, desc = "Extract selection to new note" },
-    { "<leader>ol", ":ObsidianLink<CR>", mode = { "x" }, desc = "Link existing note" },
-    { "<leader>oL", ":ObsidianLinkNew<CR>", mode = { "x" }, desc = "Create and link new note" },
+
+    --- root under (o)
+    { "<leader>oo", "<cmd>Obsidian quick_switch<CR>", desc = "Open note (quick switch)" },
+    { "<leader>o<Space>", "<cmd>Obsidian quick_switch<CR>", desc = "Open note (quick switch)" },
+    { "<leader>o/", "<cmd>Obsidian search<CR>", desc = "Search notes (grep)" },
+
+    --- visual only
+    { "<leader>oe", "<cmd>Obsidian extract_note<CR>", mode = { "x" }, desc = "Extract selection to new note" },
+    { "<leader>ol", "<cmd>Obsidian link<CR>", mode = { "x" }, desc = "Link existing note" },
+    { "<leader>oL", "<cmd>Obsidian link_new<CR>", mode = { "x" }, desc = "Create and link new note" },
+
+    -- File subgroup (<leader>of...)
+    { "<leader>off", "<cmd>Obsidian quick_switch<CR>", desc = "Open note (quick switch)" },
+    { "<leader>ofO", "<cmd>Obsidian open<CR>", desc = "Open note in Obsidian" },
+    -- { "<leader>ofn", "<cmd>Obsidian new<CR>", desc = "New note" },
+    { "<leader>ofn", "<cmd>Obsidian new_from_template<CR>", desc = "New note from template" },
+    { "<leader>ofr", "<cmd>Obsidian rename<CR>", desc = "Rename note" },
+
+    -- Search subgroup (<leader>os...)
+    { "<leader>osg", "<cmd>Obsidian search<CR>", desc = "Search notes (grep)" },
+    { "<leader>osb", "<cmd>Obsidian backlinks<CR>", desc = "Search backlinks" },
+    { "<leader>osl", "<cmd>Obsidian links<CR>", desc = "Search links" },
+    { "<leader>ost", "<cmd>Obsidian toc<CR>", desc = "Search TOC" },
+
+    -- Insert subgroup (<leader>oi...)
+    { "<leader>oii", "<cmd>Obsidian paste_img<CR>", desc = "Paste image" },
+    { "<leader>oit", "<cmd>Obsidian template<CR>", desc = "Insert template" },
   },
+
+  ---@module 'obsidian'
+  ---@type obsidian.config
   opts = {
     ui = { enable = false },
     workspaces = {
@@ -38,50 +69,24 @@ return {
         end,
       },
     },
-    -- Default frontmatter
-    disable_frontmatter = false,
-    note_frontmatter_func = function(note)
-      -- Add the title of the note as an alias.
-      if note.title then
-        note:add_alias(note.title)
-      end
-
-      -- Start constructing the frontmatter table.
-      local out = {
-        id = note.id,
-        aliases = note.aliases,
-        tags = note.tags,
-        links = { "[[]]" },
-      }
-
-      -- `note.metadata` contains any manually added fields in the frontmatter.
-      -- Merge those fields into the frontmatter, ensuring they are kept.
-      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-        for k, v in pairs(note.metadata) do
-          out[k] = v
-        end
-      end
-
-      return out
-    end,
 
     -- Set default notes directory
     notes_subdir = "01-zettelkasten",
     new_notes_location = "notes_subdir",
 
-    -- Option for ObsidianNew
+    -- Overwrite title generation
     ---@param title string|?
     ---@return string
     note_id_func = function(title)
-      if title == nil or title == "" then
-        error("File name is required.")
+      if title ~= nil then
+        return title
       end
-      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-      return tostring(os.time()) .. "-" .. suffix
+      return tostring(os.time()) .. "-untitled"
     end,
 
+    disable_frontmatter = true,
     templates = {
-      subdir = "_templates",
+      folder = "_templates",
     },
 
     preferred_link_style = "wiki",
