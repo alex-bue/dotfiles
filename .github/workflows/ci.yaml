@@ -18,6 +18,18 @@ jobs:
       - run: ./install.sh
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
+      - name: Verify binaries on PATH
+        run: |
+          set -e
+          for bin in zoxide fzf starship nvim; do
+            if ! command -v "$bin" >/dev/null 2>&1; then
+              echo "ERROR: $bin not found in PATH"
+              exit 1
+            fi
+            echo "$bin at $(command -v "$bin")"
+            "$bin" --version || "$bin" -V || true
+            test -x "$(command -v "$bin")"
+          done
 
   clone-and-install-macos:
     runs-on: macos-latest
