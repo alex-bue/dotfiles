@@ -7,12 +7,13 @@
 
 {{/* detect GitHub Codespaces, VSCode devcontainers, CI */}}
 {{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (env "CI") -}}
+  sourceDir = {{ .chezmoi.sourceDir | quote }}
   {{- $ephemeral = true -}}
   {{- $headless = true -}}
 {{- end -}}
 
 {{- /* prompt only when interactive and not pre-marked ephemeral */ -}}
-{{- if not $headless -}}
+{{ if not $headless }}
   {{- $personal  = promptBoolOnce . "personal"  "Is this a personal machine" -}}
   {{- if not $personal -}}
    {{- $email = promptStringOnce . "email"   "Email address" -}}
