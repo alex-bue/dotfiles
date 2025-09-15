@@ -70,7 +70,7 @@ formulae = []
 packages = [
     "bat",
     "curl",
-    "fzf",
+    "gh",
     "git",
     "ripgrep",
     "sudo",

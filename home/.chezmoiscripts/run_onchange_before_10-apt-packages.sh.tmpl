@@ -1,0 +1,41 @@
+{{- if eq .chezmoi.os "linux" -}}
+
+#!/usr/bin/env bash
+
+packages=(
+    {{ range $package := .packages.apt.common.packages }}
+    "{{ $package }}"
+    {{ end }}
+    {{ if not .personal }}
+    {{ range $package := .packages.apt.work_computer.packages }}
+    "{{ $package }}"
+    {{ end }}
+    {{ end }}
+    {{ if .personal }}
+    {{ range $package := .packages.apt.personal_computer.packages }}
+    "{{ $package }}"
+    {{ end }}
+    {{ end }}
+)
+
+sudo apt-get update
+
+for package in "${packages[@]}"; do
+  [ -n "$package" ] || continue
+
+  # already installed?
+  if dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
+    echo "Already installed: $package"
+    continue
+  fi
+
+  # available in apt?
+  if apt-cache show "$package" >/dev/null 2>&1; then
+    echo "Installing: $package"
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-upgrade "$package"
+  else
+    echo "Not available in apt: $package"
+  fi
+done
+
+{{- end -}}
