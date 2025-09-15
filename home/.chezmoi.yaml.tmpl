@@ -6,11 +6,11 @@
 {{- $email := "alexanderbuescher@outlook.com" -}}
 
 {{/* detect GitHub Codespaces, VSCode devcontainers, CI */}}
-{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (env "CI") -}}
-  sourceDir = {{ .chezmoi.sourceDir | quote }}
-  {{- $ephemeral = true -}}
-  {{- $headless = true -}}
-{{- end -}}
+{{ if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (env "CI") }}
+sourceDir: {{ .chezmoi.sourceDir | quote }}
+{{ $ephemeral = true }}
+{{ $headless = true }}
+{{ end }}
 
 {{- /* prompt only when interactive and not pre-marked ephemeral */ -}}
 {{ if not $headless }}
