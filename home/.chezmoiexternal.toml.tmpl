@@ -11,7 +11,7 @@
     type = "file"
     {{- if eq .chezmoi.arch "arm64" }}
     url = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.appimage"
-    {{ else }}
+    {{- else }}
     url = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage"
     {{- end }}
     refreshPeriod = "672h"
@@ -21,7 +21,7 @@
     type = "archive-file"
     {{- if eq .chezmoi.arch "arm64" }}
     url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-aarch64-unknown-linux-musl.tar.gz" | quote }}
-    {{ else }}
+    {{- else }}
     url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-x86_64-unknown-linux-musl.tar.gz" | quote }}
     {{- end }}
     refreshPeriod = "168h"
@@ -39,7 +39,7 @@
     type = "archive-file"
     {{- if eq .chezmoi.arch "arm64" }}
     url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-aarch64-unknown-linux-musl.tar.gz" | quote }}
-    {{ else }}
+    {{- else }}
     url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-x86_64-unknown-linux-gnu.tar.gz" | quote }}
     {{- end }}
     refreshPeriod = "168h"
