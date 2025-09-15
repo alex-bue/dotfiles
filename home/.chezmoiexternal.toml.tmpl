@@ -18,36 +18,32 @@
     executable = true
     path = "zoxide"
     refreshPeriod = "168h"
-
-    {{- if eq .chezmoi.arch "amd64" -}}
+    {{ if eq .chezmoi.arch "amd64" }}
     url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-x86_64-unknown-linux-musl.tar.gz" | quote }}
-    {{- else if eq .chezmoi.arch "arm64" -}}
+    {{ else if eq .chezmoi.arch "arm64" }}
     url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-aarch64-unknown-linux-musl.tar.gz" | quote }}
-    {{- else -}}
-    {{- end }}
+    {{ else }}
+    # unsupported arch for zoxide on linux
+    {{ end }}
 
 [".local/bin/fzf"]
     type = "archive-file"
     executable = true
     path = "fzf"
     refreshPeriod = "168h"
-    {{- if eq .chezmoi.arch "amd64" -}}
-    url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" "fzf-*-linux_amd64.tar.gz" | quote }}
-    {{- else if eq .chezmoi.arch "arm64" -}}
-    url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" "fzf-*-linux_arm64.tar.gz" | quote }}
-    {{- else -}}
-    {{- end }}
+    url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" (printf "fzf-*-%s_%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
 
 [".local/bin/starship"]
     type = "archive-file"
     executable = true
     path = "starship"
     refreshPeriod = "168h"
-    {{- if eq .chezmoi.arch "amd64" -}}
+    {{ if eq .chezmoi.arch "amd64" }}
     url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-x86_64-unknown-linux-gnu.tar.gz" | quote }}
-    {{- else if eq .chezmoi.arch "arm64" -}}
+    {{ else if eq .chezmoi.arch "arm64" }}
     url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-aarch64-unknown-linux-gnu.tar.gz" | quote }}
-    {{- else -}}
-    {{- end }}
+    {{ else }}
+    # unsupported arch for starship
+    {{ end }}
 
 {{- end }}
