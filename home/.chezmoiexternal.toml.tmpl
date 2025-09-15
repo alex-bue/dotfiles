@@ -5,7 +5,7 @@
     stripComponents = 1
     refreshPeriod = "168h"
 
-{{- if eq .chezmoi.os "linux-ubuntu" }}
+{{- if eq .chezmoi.os "linux" }}
 
 [".local/bin/nvim"]
     type = "file"
@@ -13,12 +13,44 @@
     refreshPeriod = "672h"
     executable = true
 
+[".local/bin/zoxide"]
+    type = "archive-file"
+    executable = true
+    path = "zoxide"
+    refreshPeriod = "168h"
+
+    {{- if eq .chezmoi.arch "amd64" -}}
+    url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-x86_64-unknown-linux-musl.tar.gz" | quote }}
+    {{- else if eq .chezmoi.arch "arm64" -}}
+    url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-aarch64-unknown-linux-musl.tar.gz" | quote }}
+    {{- else -}}
+    {{-   errorf "Unsupported arch for zoxide: %s" .chezmoi.arch -}}
+    {{- end }}
+
 [".local/bin/fzf"]
-type = "archive"
-url = "https://github.com/junegunn/fzf/releases/latest/download/fzf-linux_{{ if eq .chezmoi.arch "arm64" }}arm64{{ else }}amd64{{ end }}.tar.gz"
-stripComponents = 0
-include = ["fzf"]
-refreshPeriod = "168h" # weekly
-executable = true
+    type = "archive-file"
+    executable = true
+    path = "fzf"
+    refreshPeriod = "168h"
+    {{- if eq .chezmoi.arch "amd64" -}}
+    url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" "fzf-*-linux_amd64.tar.gz" | quote }}
+    {{- else if eq .chezmoi.arch "arm64" -}}
+    url = {{ gitHubLatestReleaseAssetURL "junegunn/fzf" "fzf-*-linux_arm64.tar.gz" | quote }}
+    {{- else -}}
+    {{-   errorf "Unsupported arch: %s" .chezmoi.arch -}}
+    {{- end }}
+
+[".local/bin/starship"]
+    type = "archive-file"
+    executable = true
+    path = "starship"
+    refreshPeriod = "168h"
+    {{- if eq .chezmoi.arch "amd64" -}}
+    url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-x86_64-unknown-linux-gnu.tar.gz" | quote }}
+    {{- else if eq .chezmoi.arch "arm64" -}}
+    url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-aarch64-unknown-linux-gnu.tar.gz" | quote }}
+    {{- else -}}
+    {{-   errorf "Unsupported arch: %s" .chezmoi.arch -}}
+    {{- end }}
 
 {{- end }}

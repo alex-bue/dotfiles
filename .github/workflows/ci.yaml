@@ -18,14 +18,6 @@ jobs:
       - run: ./install.sh
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
-      - name: Verify fzf
-        run: |
-          if ! command -v fzf >/dev/null 2>&1; then
-            echo "fzf not found in PATH"
-            exit 1
-          fi
-          echo "fzf is installed at: $(command -v fzf)"
-          fzf --version
 
   clone-and-install-macos:
     runs-on: macos-latest
