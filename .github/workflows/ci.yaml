@@ -21,7 +21,7 @@ jobs:
       - name: Print resolved .chezmoiexternal.toml
         run: |
           echo "----- BEGIN RESOLVED .chezmoiexternal.toml -----"
-          chezmoi execute-template < home/.chezmoiexternal.toml.tmpl
+          "$HOME/.local/bin/chezmoi" execute-template < home/.chezmoiexternal.toml.tmpl
           echo "----- END RESOLVED .chezmoiexternal.toml -----"
 
   clone-and-install-macos:
