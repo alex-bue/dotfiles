@@ -24,7 +24,6 @@
     {{- else if eq .chezmoi.arch "arm64" -}}
     url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-aarch64-unknown-linux-musl.tar.gz" | quote }}
     {{- else -}}
-    {{-   errorf "Unsupported arch for zoxide: %s" .chezmoi.arch -}}
     {{- end }}
 
 [".local/bin/fzf"]
