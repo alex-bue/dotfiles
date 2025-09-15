@@ -19,16 +19,9 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* keep osID for troubleshooting */ -}}
-{{- $osID := .chezmoi.os -}}
-{{- if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") -}}
-  {{- $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
-{{- end -}}
-
 data:
   personal: {{ $personal }}
   email: {{ $email | quote }}
   headless: {{ $headless }}
   ephemeral: {{ $ephemeral }}
-  osid: {{ $osID | quote }}
   hostname: {{ $hostname | quote }}

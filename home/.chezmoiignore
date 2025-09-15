@@ -3,6 +3,10 @@
 .config/aerospace
 {{ end }}
 
+{{ if .headless }}
+.config/wezterm
+{{ end }}
+
 # Currently not used at all (potentially delete yabai and skhd)
 .config/yabai
 .config/skhd
