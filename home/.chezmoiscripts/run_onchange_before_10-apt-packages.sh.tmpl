@@ -1,0 +1,48 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
+
+packages=(
+    {{ range $package := .packages.apt.common.packages }}
+    "{{ $package }}"
+    {{- end }}
+    {{- if not .personal }}
+    {{ range $package := .packages.apt.work_computer.packages }}
+    "{{ $package }}"
+    {{- end }}
+    {{- end }}
+    {{- if .personal }}
+    {{ range $package := .packages.apt.personal_computer.packages }}
+    "{{ $package }}"
+    {{- end }}
+    {{- end }}
+)
+
+SUDO=""
+if [ "$(id -u)" -ne 0 ]; then
+  if command -v sudo >/dev/null 2>&1; then
+    SUDO="sudo"
+  else
+    echo "Need root privileges or sudo to install packages." >&2
+    exit 1
+  fi
+fi
+
+$SUDO apt-get update
+
+for package in "${packages[@]}"; do
+  [ -n "$package" ] || continue
+
+  if dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
+    echo "Already installed: $package"
+    continue
+  fi
+
+  if apt-cache show "$package" >/dev/null 2>&1; then
+    echo "Installing: $package"
+    DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y --no-upgrade --no-install-recommends "$package"
+  else
+    echo "Not available in apt: $package"
+  fi
+done
+
+{{- end -}}

@@ -9,13 +9,21 @@
 
 [".local/bin/nvim"]
     type = "file"
+    {{- if eq .chezmoi.arch "arm64" }}
+    url = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-arm64.appimage"
+    {{- else }}
     url = "https://github.com/neovim/neovim/releases/download/stable/nvim-linux-x86_64.appimage"
+    {{- end }}
     refreshPeriod = "672h"
     executable = true
 
 [".local/bin/zoxide"]
     type = "archive-file"
+    {{- if eq .chezmoi.arch "arm64" }}
+    url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-aarch64-unknown-linux-musl.tar.gz" | quote }}
+    {{- else }}
     url = {{ gitHubLatestReleaseAssetURL "ajeetdsouza/zoxide" "zoxide-*-x86_64-unknown-linux-musl.tar.gz" | quote }}
+    {{- end }}
     refreshPeriod = "168h"
     executable = true
     path = "zoxide"
@@ -29,7 +37,11 @@
 
 [".local/bin/starship"]
     type = "archive-file"
+    {{- if eq .chezmoi.arch "arm64" }}
+    url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-aarch64-unknown-linux-musl.tar.gz" | quote }}
+    {{- else }}
     url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-x86_64-unknown-linux-gnu.tar.gz" | quote }}
+    {{- end }}
     refreshPeriod = "168h"
     executable = true
     path = "starship"
