@@ -1,22 +1,41 @@
-{{/* boolean feature tags */}}
-{{- $personal := false -}}
-{{- $interactive := stdinIsATTY -}}
-
-{{- $osID := .chezmoi.os -}}
-{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
-{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
-{{- end -}}
-
+{{- /* defaults */ -}}
 {{- $hostname := .chezmoi.hostname -}}
+{{- $headless := not stdinIsATTY -}}
+{{- $ephemeral := false -}}
+{{- $personal := true -}}
+{{- $email := "alexanderbuescher@outlook.com" -}}
 
-{{- if eq $hostname "Alexanders-MBP" -}}
-{{-   $personal = true -}}
+{{/* detect GitHub Codespaces, VSCode devcontainers, CI */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (env "CI") -}}
+  {{- $ephemeral = true -}}
+  {{- $headless = true -}}
 {{- end -}}
 
-{{- $email := "alibue@hotmail.de" -}}
+{{- /* prompt only when interactive and not pre-marked ephemeral */ -}}
+{{- if and (not $ephemeral) (stdinIsATTY) -}}
+  {{- $headless  = promptBoolOnce . "headless"  "Headless (no prompts)" -}}
+  {{- $ephemeral = promptBoolOnce . "ephemeral" "Ephemeral environment" -}}
+  {{- $personal  = promptBoolOnce . "personal"  "Is this a personal machine" -}}
+  {{- $email     = promptStringOnce . "email"   "Email address" -}}
+{{- end -}}
+
+{{- /* if non-personal and still interactive, offer a work email once */ -}}
+{{- if and (not $personal) (not $headless) -}}
+  {{- $email = promptStringOnce . "workEmail" "Work email address" -}}
+{{- else if not $personal -}}
+  {{- $email = "you@company.com" -}}
+{{- end -}}
+
+{{- /* keep osID for troubleshooting */ -}}
+{{- $osID := .chezmoi.os -}}
+{{- if and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id") -}}
+  {{- $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
 
 data:
-  email: {{ $email | quote }}
-  hostname: {{ $hostname | quote }}
-  osid: {{ $osID | quote }}
   personal: {{ $personal }}
+  email: {{ $email | quote }}
+  headless: {{ $headless }}
+  ephemeral: {{ $ephemeral }}
+  osid: {{ $osID | quote }}
+  hostname: {{ $hostname | quote }}
