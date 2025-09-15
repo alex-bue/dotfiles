@@ -25,13 +25,19 @@ jobs:
           echo "----- END RESOLVED .chezmoiexternal.toml -----"
       - name: Verify binaries on PATH
         run: |
-          set -euo pipefail
+          set -eu
+          fail=0
           for bin in nvim fzf starship zoxide; do
             echo "Checking $bin..."
-            command -v "$bin"
-            test -x "$(command -v "$bin")"
-            "$bin" --version || "$bin" -V || true
+            if ! command -v "$bin" >/dev/null 2>&1; then
+              echo "$bin not in PATH"; fail=1; continue
+            fi
+            p=$(command -v "$bin")
+            echo "$bin at $p"
+            ("$bin" --version || "$bin" -V) >/dev/null 2>&1 || true
+            [ -x "$p" ] || { echo "$bin not executable"; fail=1; }
           done
+          exit $fail
 
   clone-and-install-macos:
     runs-on: macos-latest
