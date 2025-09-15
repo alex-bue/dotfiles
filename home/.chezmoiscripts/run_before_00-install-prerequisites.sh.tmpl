@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+{{- if eq .chezmoi.os "darwin" }}
+
+# Install Homebrew if missing
+if ! command -v brew >/dev/null 2>&1; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Detect Homebrew prefix (ARM vs Intel)
+if [ -x /opt/homebrew/bin/brew ]; then
+  BREW_PREFIX=/opt/homebrew
+elif [ -x /usr/local/bin/brew ]; then
+  BREW_PREFIX=/usr/local
+else
+  BREW_PREFIX=""
+fi
+
+# Only do shellenv if we found brew
+if [ -n "$BREW_PREFIX" ]; then
+  PROFILE_FILE="${ZDOTDIR:-$HOME}/.zprofile"
+  if ! grep -qF 'brew shellenv' "$PROFILE_FILE" 2>/dev/null; then
+    printf 'eval "$(%s/bin/brew shellenv)"\n' "$BREW_PREFIX" >>"$PROFILE_FILE"
+  fi
+  eval "$("$BREW_PREFIX/bin/brew" shellenv)"
+fi
+
+{{- end }}

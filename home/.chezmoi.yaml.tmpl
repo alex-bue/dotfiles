@@ -1,22 +1,27 @@
-{{/* boolean feature tags */}}
-{{- $personal := false -}}
-{{- $interactive := stdinIsATTY -}}
-
-{{- $osID := .chezmoi.os -}}
-{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
-{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
-{{- end -}}
-
+{{- /* defaults */ -}}
 {{- $hostname := .chezmoi.hostname -}}
+{{- $headless := not stdinIsATTY -}}
+{{- $ephemeral := false -}}
+{{- $personal := false -}}
+{{- $email := "alexanderbuescher@outlook.com" -}}
 
-{{- if eq $hostname "Alexanders-MBP" -}}
-{{-   $personal = true -}}
+{{/* detect GitHub Codespaces, VSCode devcontainers, CI */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (env "CI") -}}
+  {{- $ephemeral = true -}}
+  {{- $headless = true -}}
 {{- end -}}
 
-{{- $email := "alibue@hotmail.de" -}}
+{{- /* prompt only when interactive and not pre-marked ephemeral */ -}}
+{{- if not $headless -}}
+  {{- $personal  = promptBoolOnce . "personal"  "Is this a personal machine" -}}
+  {{- if not $personal -}}
+   {{- $email = promptStringOnce . "email"   "Email address" -}}
+  {{- end -}}
+{{- end -}}
 
 data:
-  email: {{ $email | quote }}
-  hostname: {{ $hostname | quote }}
-  osid: {{ $osID | quote }}
   personal: {{ $personal }}
+  email: {{ $email | quote }}
+  headless: {{ $headless }}
+  ephemeral: {{ $ephemeral }}
+  hostname: {{ $hostname | quote }}

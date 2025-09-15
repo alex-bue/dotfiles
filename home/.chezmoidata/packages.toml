@@ -1,0 +1,85 @@
+[packages.homebrew]
+
+[packages.homebrew.common]
+casks = [
+    "alfred",
+    "font-fira-code-nerd-font",
+    "font-jetbrains-mono",
+    "font-jetbrains-mono-nerd-font",
+    "font-powerline-symbols",
+    "google-chrome",
+    "raycast",
+    "scroll-reverser",
+    "spotify",
+    "visual-studio-code",
+    "wezterm",
+]
+formulae = [
+    "bat",
+    "chezmoi",
+    "fzf",
+    "gh",
+    "git",
+    "grep",
+    "ripgrep",
+    "starship",
+    "tmux",
+    "tree",
+    "wget",
+    "zoxide",
+]
+
+[packages.homebrew.work_computer]
+casks = []
+formulae = []
+
+[packages.homebrew.personal_computer]
+casks = [
+    "aerospace",
+    "anki",
+    "battle-net",
+    "betterdisplay",
+    "chatgpt",
+    "discord",
+    "eurkey",
+    "firefox",
+    "hiddenbar",
+    "iina",
+    "karabiner-elements",
+    "logi-options+",
+    "microsoft-auto-update",
+    "microsoft-excel",
+    "microsoft-powerpoint",
+    "microsoft-word",
+    "moonlight",
+    "obsidian",
+    "onedrive",
+    "signal",
+    "skim",
+    "slack",
+    "sonos",
+    "steam",
+    "subsurface",
+    "zotero",
+]
+formulae = []
+
+[packages.apt]
+
+[packages.apt.common]
+packages = [
+    "bat",
+    "curl",
+    "fzf",
+    "git",
+    "ripgrep",
+    "sudo",
+    "tmux",
+    "wget",
+    "zsh",
+]
+[packages.apt.work_computer]
+packages = []
+
+[packages.apt.personal_computer]
+packages = []

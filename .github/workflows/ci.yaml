@@ -5,12 +5,45 @@ on:
   pull_request:
 
 jobs:
-  clone-and-install:
+  clone-and-install-linux:
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
       env:
         CODESPACES: true
+    env:
+      CODESPACES: "true"
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./install.sh
+      - name: chezmoi data
+        run: '"$HOME/.local/bin/chezmoi" data'
+      - name: Print resolved .chezmoiexternal.toml
+        run: |
+          echo "----- BEGIN RESOLVED .chezmoiexternal.toml -----"
+          "$HOME/.local/bin/chezmoi" execute-template < home/.chezmoiexternal.toml.tmpl
+          echo "----- END RESOLVED .chezmoiexternal.toml -----"
+      - run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Verify binaries on PATH
+        run: |
+          set -eu
+          fail=0
+          for bin in nvim fzf starship zoxide; do
+            echo "Checking $bin..."
+            if ! command -v "$bin" >/dev/null 2>&1; then
+              echo "$bin not in PATH"; fail=1; continue
+            fi
+            p=$(command -v "$bin")
+            echo "$bin at $p"
+            ("$bin" --version || "$bin" -V) >/dev/null 2>&1 || true
+            [ -x "$p" ] || { echo "$bin not executable"; fail=1; }
+          done
+          exit $fail
+
+  clone-and-install-macos:
+    runs-on: macos-latest
+    env:
+      CODESPACES: "true"
     steps:
       - uses: actions/checkout@v2
       - run: ./install.sh
