@@ -2,7 +2,7 @@
 {{- $hostname := .chezmoi.hostname -}}
 {{- $headless := not stdinIsATTY -}}
 {{- $ephemeral := false -}}
-{{- $personal := true -}}
+{{- $personal := false -}}
 {{- $email := "alexanderbuescher@outlook.com" -}}
 
 {{/* detect GitHub Codespaces, VSCode devcontainers, CI */}}
@@ -12,18 +12,11 @@
 {{- end -}}
 
 {{- /* prompt only when interactive and not pre-marked ephemeral */ -}}
-{{- if and (not $ephemeral) (stdinIsATTY) -}}
-  {{- $headless  = promptBoolOnce . "headless"  "Headless (no prompts)" -}}
-  {{- $ephemeral = promptBoolOnce . "ephemeral" "Ephemeral environment" -}}
+{{- if not $headless -}}
   {{- $personal  = promptBoolOnce . "personal"  "Is this a personal machine" -}}
-  {{- $email     = promptStringOnce . "email"   "Email address" -}}
-{{- end -}}
-
-{{- /* if non-personal and still interactive, offer a work email once */ -}}
-{{- if and (not $personal) (not $headless) -}}
-  {{- $email = promptStringOnce . "workEmail" "Work email address" -}}
-{{- else if not $personal -}}
-  {{- $email = "you@company.com" -}}
+  {{- if not $personal -}}
+   {{- $email = promptStringOnce . "email"   "Email address" -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* keep osID for troubleshooting */ -}}

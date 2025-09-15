@@ -1,0 +1,56 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+
+formulae=(
+    {{ range $package := .packages.homebrew.common.formulae }}
+    "{{ $package }}"
+    {{ end }}
+
+    {{ if not .personal }}
+    {{ range $package := .packages.homebrew.work_computer.formulae }}
+    "{{ $package }}"
+    {{ end }}
+    {{ end }}
+
+    {{ if .personal }}
+    {{ range $package := .packages.homebrew.personal_computer.formulae }}
+    "{{ $package }}"
+    {{ end }}
+    {{ end }}
+)
+
+casks=(
+    {{ range $package := .packages.homebrew.common.casks }}
+    "{{ $package }}"
+    {{ end }}
+
+    {{ if not .personal }}
+    {{ range $package := .packages.homebrew.work_computer.casks }}
+    "{{ $package }}"
+    {{ end }}
+    {{ end }}
+
+    {{ if .personal }}
+    {{ range $package := .packages.homebrew.personal_computer.casks }}
+    "{{ $package }}"
+    {{ end }}
+    {{ end }}
+)
+
+brew update
+
+# Formulae
+for formula in "${formulae[@]}"; do
+  [[ -z "$formula" ]] && continue
+  brew install -q --formula "$formula"
+done
+
+# Casks (skip in headless)
+{{ if not .headless }}
+for cask in "${casks[@]}"; do
+  [[ -z "$cask" ]] && continue
+  brew install -q --cask "$cask"
+done
+{{ end }}
+
+{{- end -}}
