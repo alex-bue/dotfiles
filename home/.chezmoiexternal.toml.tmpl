@@ -13,4 +13,12 @@
     refreshPeriod = "672h"
     executable = true
 
+[".local/bin/fzf"]
+type = "archive"
+url = "https://github.com/junegunn/fzf/releases/latest/download/fzf-linux_{{ if eq .chezmoi.arch "arm64" }}arm64{{ else }}amd64{{ end }}.tar.gz"
+stripComponents = 0
+include = ["fzf"]
+refreshPeriod = "168h" # weekly
+executable = true
+
 {{- end }}
