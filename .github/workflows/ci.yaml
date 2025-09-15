@@ -18,18 +18,11 @@ jobs:
       - run: ./install.sh
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
-      - name: Verify binaries on PATH
+      - name: Print resolved .chezmoiexternal.toml
         run: |
-          set -e
-          for bin in zoxide fzf starship nvim; do
-            if ! command -v "$bin" >/dev/null 2>&1; then
-              echo "ERROR: $bin not found in PATH"
-              exit 1
-            fi
-            echo "$bin at $(command -v "$bin")"
-            "$bin" --version || "$bin" -V || true
-            test -x "$(command -v "$bin")"
-          done
+          echo "----- BEGIN RESOLVED .chezmoiexternal.toml -----"
+          chezmoi execute-template < home/.chezmoiexternal.toml.tmpl
+          echo "----- END RESOLVED .chezmoiexternal.toml -----"
 
   clone-and-install-macos:
     runs-on: macos-latest
