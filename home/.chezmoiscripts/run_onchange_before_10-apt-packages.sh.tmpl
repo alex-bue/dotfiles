@@ -4,17 +4,17 @@
 packages=(
     {{ range $package := .packages.apt.common.packages }}
     "{{ $package }}"
-    {{ end }}
-    {{ if not .personal }}
+    {{- end }}
+    {{- if not .personal }}
     {{ range $package := .packages.apt.work_computer.packages }}
     "{{ $package }}"
-    {{ end }}
-    {{ end }}
-    {{ if .personal }}
+    {{- end }}
+    {{- end }}
+    {{- if .personal }}
     {{ range $package := .packages.apt.personal_computer.packages }}
     "{{ $package }}"
-    {{ end }}
-    {{ end }}
+    {{- end }}
+    {{- end }}
 )
 
 SUDO=""

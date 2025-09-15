@@ -25,9 +25,7 @@ jobs:
         run: '"$HOME/.local/bin/chezmoi" data'
       - name: Print resolved .chezmoiexternal.toml
         run: |
-          echo "----- BEGIN RESOLVED .chezmoiexternal.toml -----"
           "$HOME/.local/bin/chezmoi" execute-template < home/.chezmoiexternal.toml.tmpl
-          echo "----- END RESOLVED .chezmoiexternal.toml -----"
       - run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Verify binaries on PATH
         run: |
