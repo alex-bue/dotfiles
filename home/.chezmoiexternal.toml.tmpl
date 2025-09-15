@@ -38,7 +38,7 @@
 [".local/bin/starship"]
     type = "archive-file"
     {{- if eq .chezmoi.arch "arm64" }}
-    url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-aarch64-unknown-linux-gnu.tar.gz" | quote }}
+    url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-aarch64-unknown-linux-musl.tar.gz" | quote }}
     {{ else }}
     url = {{ gitHubLatestReleaseAssetURL "starship/starship" "starship-x86_64-unknown-linux-gnu.tar.gz" | quote }}
     {{- end }}
