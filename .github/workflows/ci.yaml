@@ -19,7 +19,7 @@ jobs:
       - name: chezmoi data
         run: '"$HOME/.local/bin/chezmoi" data'
       - name: Verify fzf
-      - run: |
+        run: |
           if ! command -v fzf >/dev/null 2>&1; then
             echo "fzf not found in PATH"
             exit 1
