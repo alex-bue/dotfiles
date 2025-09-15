@@ -7,9 +7,9 @@ on:
 jobs:
   clone-and-install-linux:
     strategy:
-    fail-fast: false
-    matrix:
-      runner: [ubuntu-latest, ubuntu-24.04-arm] # amd64 + arm64
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm] # amd64 + arm64
     runs-on: ${{ matrix.runner }}
 
     container:
