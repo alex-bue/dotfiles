@@ -17,32 +17,18 @@ packages=(
     {{- end }}
 )
 
+export DEBIAN_FRONTEND=noninteractive UCF_FORCE_CONFNEW=1 NEEDRESTART_MODE=a
+
 SUDO=""
-if [ "$(id -u)" -ne 0 ]; then
-  if command -v sudo >/dev/null 2>&1; then
-    SUDO="sudo"
-  else
-    echo "Need root privileges or sudo to install packages." >&2
-    exit 1
-  fi
+if [ "$(id -u)" -ne 0 ] && command -v sudo >/dev/null 2>&1; then
+  SUDO="sudo -E"
 fi
 
-$SUDO apt-get update
-
-for package in "${packages[@]}"; do
-  [ -n "$package" ] || continue
-
-  if dpkg-query -W -f='${Status}' "$package" 2>/dev/null | grep -q "install ok installed"; then
-    echo "Already installed: $package"
-    continue
-  fi
-
-  if apt-cache show "$package" >/dev/null 2>&1; then
-    echo "Installing: $package"
-    DEBIAN_FRONTEND=noninteractive $SUDO apt-get install -y --no-upgrade --no-install-recommends "$package"
-  else
-    echo "Not available in apt: $package"
-  fi
-done
+$SUDO apt-get update -y
+$SUDO apt-get install -y -q \
+  -o Dpkg::Options::="--force-confnew" \
+  -o Dpkg::Options::="--force-confdef" \
+  --no-install-recommends \
+  "${packages[@]}"
 
 {{- end -}}
