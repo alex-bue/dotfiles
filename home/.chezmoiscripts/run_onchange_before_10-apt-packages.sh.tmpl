@@ -25,7 +25,7 @@ if [ "$(id -u)" -ne 0 ] && command -v sudo >/dev/null 2>&1; then
 fi
 
 $SUDO apt-get update -y
-$SUDO apt-get install -y -q \
+$SUDO apt-get install -y \
   -o Dpkg::Options::="--force-confnew" \
   -o Dpkg::Options::="--force-confdef" \
   --no-install-recommends \
