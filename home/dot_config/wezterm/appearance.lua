@@ -39,8 +39,6 @@ function module.apply_to_config(config)
 	-- Window frame fonnt and colour
 	config.window_frame = {
 		font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
-		active_titlebar_bg = "#3B4252",
-		inactive_titlebar_bg = "#3B4252",
 	}
 end
 
