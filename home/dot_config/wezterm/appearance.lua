@@ -8,13 +8,13 @@ function module.apply_to_config(config)
 
 	-- Window
 	config.window_close_confirmation = "NeverPrompt"
-	config.window_decorations = "TITLE | RESIZE"
+	config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
 	config.window_background_opacity = 1
 	config.window_padding = {
-		left = "10px",
-		right = 0,
-		top = 0,
-		bottom = "4px",
+		left = "1cell",
+		right = "1cell",
+		top = "1.5cell",
+		bottom = "0cell",
 	}
 
 	-- Style inactive panes
