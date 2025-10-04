@@ -4,7 +4,7 @@ local module = {}
 
 function module.apply_to_config(config)
 	-- Set colour scheme
-	config.color_scheme = "catppuccin-frappe"
+	config.color_scheme = "Catppuccin Frappe"
 
 	-- Window
 	config.window_close_confirmation = "NeverPrompt"

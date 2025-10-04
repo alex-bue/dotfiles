@@ -1,0 +1,32 @@
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export TERM=xterm-256color
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export NVIM_APPNAME="lazyvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+{{- if eq .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.arch "arm64" }}
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+{{- else -}}
+if [[ -x /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+{{- end -}}
+{{- else if eq .chezmoi.os "linux" }}
+if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+{{- end }}
+
+source "$HOME/.config/shell/aliases.sh"
+
+# activate fzf and starship prompt
+eval "$(fzf --bash)"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init bash)"

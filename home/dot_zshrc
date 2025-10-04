@@ -1,18 +1,28 @@
-# Enable colors and change prompt:
-autoload -U colors && colors	# Load colors
-
-# Adapted from https://unix.stackexchange.com/a/113768/347104
-# if [ -n "$PS1" ] && [ -z "$TMUX" ]; then
-#   # Adapted from https://unix.stackexchange.com/a/176885/347104
-#   # Create session 'main' or attach to 'main' if already exists.
-#   tmux new-session -A -s main
+# If not in tmux, start tmux.
+# if [[ -z ${TMUX+X}${ZSH_SCRIPT+X}${ZSH_EXECUTION_STRING+X} ]]; then
+#   exec tmux
 # fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+export ZSH_PLUGIN_DIR="$HOME/.config/zsh/plugins"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export NVIM_APPNAME="lazyvim"
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml" # Starship config
+# eval "$(starship init zsh)"
+
+# Aliases
+source "$HOME/.config/shell/aliases.sh"
 
 # Enable history
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000                    # Maximum events for internal history
 SAVEHIST=5000                    # Maximum events in history file
-
 setopt appendhistory             # Append rather than overwrite
 setopt share_history             # Share history between all sessions.
 setopt hist_ignore_space         # Do not record an event starting with a space.
@@ -23,87 +33,41 @@ setopt hist_find_no_dups         # Do not display a previously found event.
 setopt hist_save_no_dups         # Do not write a duplicate event to the history file.
 setopt hist_verify               # Do not execute immediately upon history expansion.
 
-# Configure completions
+# Configure completions including fzf
 zstyle ':completion:*' menu no                              # Disable zsh complete menus (because plugin handles them)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case insensitive completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Color the completions
 # _comp_options+=(globdots)       # Complete hidden(dot)files
-
-# Configure fzf-tab completions
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept' # Use tab as enter instead of going down the list
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # Use fzf tab for cd completions
 
-# Initialize completion system
+# Enable completions
+fpath=(~/.config/zsh/plugins/zsh-completions/src $fpath)
 autoload -Uz compinit && compinit
 
-# enable and configure vi mode
-bindkey -v
-export KEYTIMEOUT=1
+# source plugins
+if [[ -e ~/.config/zsh/plugins/fzf-tab ]]; then
+  source ~/.config/zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+fi
 
-bindkey '^H' backward-delete-char  # For ^H to work globally
-bindkey '^?' backward-delete-char  # For ^? to work globally
+if [[ -e ~/.config/zsh/plugins/zsh-vi-mode ]]; then
+  source ~/.config/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+fi
 
-# Use vim keys in tab complete menu (currently not needed because fzf is used)
-# bindkey -M menuselect 'h' vi-backward-char
-# bindkey -M menuselect 'k' vi-up-line-or-history
-# bindkey -M menuselect 'l' vi-forward-char
-# bindkey -M menuselect 'j' vi-down-line-or-history
+if [[ -e ~/.config/zsh/plugins/zsh-syntax-highlighting ]]; then
+  source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
-# Change cursor shape for different vi modes.
-function zle-keymap-select () {
-    case $KEYMAP in
-        vicmd) echo -ne '\e[1 q';;      # block
-        viins|main) echo -ne '\e[5 q';; # beam
-    esac
+if [[ -e ~/.config/zsh/plugins/powerlevel10k ]]; then
+  source ~/.config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+function zvm_after_init() {
+  bindkey -M viins '^R' fzf-history-widget
+  bindkey -M vicmd '^R' fzf-history-widget
 }
-zle -N zle-keymap-select
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
-}
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Allow editing cli in nvim
-autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line # CTRL-E to edit cli prompt in NVIM
-
-# sesh keybinding
-function sesh-sessions() {
-  {
-    exec </dev/tty
-    exec <&1
-    local session
-    session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
-    zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect $session
-  }
-}
-zle     -N            sesh-sessions
-bindkey -M emacs '^k' sesh-sessions
-bindkey -M vicmd '^k' sesh-sessions
-bindkey -M viins '^k' sesh-sessions
-
-# load modules
-source "$HOME/.config/shell/aliases.sh"
-source "$HOME/.config/shell/exports.sh"
-
-# Install plugin manager (zinit)
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
-
-# add zsh plugins
-zinit light Aloxaf/fzf-tab
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit cdreplay -q # apparently speeds completions loading up
-
-# load programs
 eval "$(fzf --zsh)"
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
+# eval "$(zoxide init zsh)"
+
+[[ -e ~/.p10k.zsh ]] && source ~/.p10k.zsh
