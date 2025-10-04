@@ -68,6 +68,6 @@ function zvm_after_init() {
 }
 
 eval "$(fzf --zsh)"
-# eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh)"
 
 [[ -e ~/.p10k.zsh ]] && source ~/.p10k.zsh
