@@ -1,19 +1,12 @@
-local function obsidian_root()
-  local uv = vim.uv or vim.loop
-  local fname = vim.api.nvim_buf_get_name(0)
-  if fname == "" then
-    fname = uv.cwd()
-  end
-  local start = vim.fs.dirname(fname)
-  local hit = vim.fs.find(".obsidian", { path = start, upward = true, type = "directory" })[1]
-  return hit and vim.fs.dirname(hit) or nil
-end
-
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
+  cond = function()
+    return vim.fs.root(0, { ".obsidian" }) ~= nil
+  end,
+
   dependencies = { "folke/which-key.nvim" },
 
   -- which-key groups (kept close to the plugin)
@@ -69,8 +62,7 @@ return {
       {
         name = "auto",
         path = function()
-          -- cond() guarantees non-nil inside a vault
-          return assert(obsidian_root(), "no .obsidian found")
+          return assert(vim.fs.root(0, { ".obsidian" }), "no .obsidian directory found")
         end,
       },
     },
