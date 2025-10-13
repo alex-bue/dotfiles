@@ -1,20 +1,19 @@
+local function obsidian_root()
+  local uv = vim.uv or vim.loop
+  local fname = vim.api.nvim_buf_get_name(0)
+  if fname == "" then
+    fname = uv.cwd()
+  end
+  local start = vim.fs.dirname(fname)
+  local hit = vim.fs.find(".obsidian", { path = start, upward = true, type = "directory" })[1]
+  return hit and vim.fs.dirname(hit) or nil
+end
+
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = "markdown",
-
-  event = {
-    "BufReadPre /Users/ab/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/obsidian-vault/**.md",
-    "BufNewFile /Users/ab/Library/Mobile\\ Documents/iCloud~md~obsidian/Documents/obsidian-vault/**.md",
-  },
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-  --   "BufReadPre path/to/my-vault/**.md",
-  --   "BufNewFile path/to/my-vault/**.md",
-  -- },
   dependencies = { "folke/which-key.nvim" },
 
   -- which-key groups (kept close to the plugin)
@@ -68,12 +67,14 @@ return {
     ui = { enable = false },
     workspaces = {
       {
-        name = "main",
-        path = "/Users/ab/Library/Mobile Documents/iCloud~md~obsidian/Documents/obsidian-vault",
+        name = "auto",
+        path = function()
+          -- cond() guarantees non-nil inside a vault
+          return assert(obsidian_root(), "no .obsidian found")
+        end,
       },
     },
 
-    -- Set default notes directory
     notes_subdir = "01-zettelkasten",
     new_notes_location = "notes_subdir",
 
