@@ -7,6 +7,11 @@
 vim.keymap.del("n", "<leader>bb")
 vim.keymap.del("n", "<leader>`")
 
+-- Snacks Picker
+vim.keymap.set("n", "<leader>bb", function()
+  Snacks.picker.buffers()
+end, { desc = "Buffers" })
+
 -- tabs
 vim.keymap.del("n", "<leader><tab>l")
 vim.keymap.del("n", "<leader><tab>o")
