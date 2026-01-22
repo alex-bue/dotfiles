@@ -78,6 +78,7 @@ shift-alt-c = 'close'
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 alt-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
 alt-b = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
+alt-y = 'exec-and-forget open -na /Applications/WezTerm.app --args start yazi ~'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-f = 'fullscreen'
