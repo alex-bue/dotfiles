@@ -6,7 +6,7 @@ set -g status-left-length 100
 set -g status-left ""
 
 # session name
-set -ga status-left "#{?client_prefix,#{#[bg=#{@accent},fg=#{@bg1},bold]  #S #[nobold]},#{#[bg=default,fg=#{@fg}]  #S }}"
+set -ga status-left "#{?client_prefix,#{#[bg=#{@accent},fg=#{@bg1},bold]  #S #[nobold]},#{#[bg=default,fg=#{@accent2}]  #S }}"
 
 # command
 set -ga status-left "#[bg=default,fg=#{@fg}]  #{pane_current_command} "
