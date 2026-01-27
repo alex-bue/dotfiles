@@ -38,7 +38,7 @@ function module.apply_to_config(config)
 
 	-- Window frame fonnt and colour
 	config.window_frame = {
-		font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
+		font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" }),
 	}
 end
 
