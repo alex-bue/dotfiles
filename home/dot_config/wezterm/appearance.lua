@@ -9,7 +9,7 @@ function module.apply_to_config(config)
 	-- Window
 	config.window_close_confirmation = "NeverPrompt"
 	config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
-	config.window_background_opacity = 0.98
+	config.window_background_opacity = 1
 	config.window_padding = {
 		left = "1cell",
 		right = "1cell",
