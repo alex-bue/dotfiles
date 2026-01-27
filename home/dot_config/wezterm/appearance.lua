@@ -4,7 +4,7 @@ local module = {}
 
 function module.apply_to_config(config)
 	-- Set colour scheme
-	config.color_scheme = "Catppuccin Frappe"
+	config.color_scheme = "Everforest Dark (Gogh)"
 
 	-- Window
 	config.window_close_confirmation = "NeverPrompt"
@@ -38,7 +38,7 @@ function module.apply_to_config(config)
 
 	-- Window frame fonnt and colour
 	config.window_frame = {
-		font = wezterm.font({ family = "JetBrains Mono", weight = "Bold" }),
+		font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" }),
 	}
 end
 
