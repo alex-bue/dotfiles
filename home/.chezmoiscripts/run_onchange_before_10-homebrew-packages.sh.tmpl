@@ -49,7 +49,7 @@ done
 {{ if not .headless }}
 for cask in "${casks[@]}"; do
   [[ -z "$cask" ]] && continue
-  brew install -q --cask "$cask"
+  brew list --cask "$cask" >/dev/null 2>&1 || brew install -q --cask "$cask"
 done
 {{ end }}
 
