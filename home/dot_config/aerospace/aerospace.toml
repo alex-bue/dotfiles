@@ -76,9 +76,10 @@ shift-alt-c = 'close'
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-alt-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
+# alt-enter = 'exec-and-forget open -n /Applications/Nix\ Apps/WezTerm.app'
+alt-enter = 'exec-and-forget /bin/bash -lc "pgrep -qx wezterm-gui && wezterm cli spawn --new-window || open -na WezTerm.app'
 alt-b = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
-alt-y = 'exec-and-forget open -na /Applications/WezTerm.app --args start yazi ~'
+alt-y = 'exec-and-forget wezterm cli spawn --new-window -- yazi ~'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-f = 'fullscreen'
@@ -191,3 +192,9 @@ run = 'move-node-to-workspace 4'
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = 'move-node-to-workspace 5'
+
+[exec]
+inherit-env-vars = true
+
+[exec.env-vars]
+PATH = '/run/current-system/sw/bin:${HOME}/.nix-profile/bin:${HOME}/.local/state/nix/profile/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'

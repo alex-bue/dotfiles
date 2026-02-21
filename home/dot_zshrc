@@ -41,7 +41,6 @@ setopt hist_ignore_all_dups      # Delete an old recorded event if a new event i
 setopt hist_find_no_dups         # Do not display a previously found event.
 setopt hist_save_no_dups         # Do not write a duplicate event to the history file.
 setopt hist_verify               # Do not execute immediately upon history expansion.
-
 # Configure completions including fzf
 zstyle ':completion:*' menu no                              # Disable zsh complete menus (because plugin handles them)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # Case insensitive completion
@@ -50,8 +49,12 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"     # Color the completi
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept' # Use tab as enter instead of going down the list
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath' # Use fzf tab for cd completions
 
+# Nix profile completions
+if [ -d "$HOME/.nix-profile/share/zsh/site-functions" ]; then
+  fpath=("$HOME/.nix-profile/share/zsh/site-functions" $fpath)
+fi
+
 # Enable completions
-fpath=(~/.config/zsh/plugins/zsh-completions/src $fpath)
 autoload -Uz compinit && compinit
 
 # source plugins
