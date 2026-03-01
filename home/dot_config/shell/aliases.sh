@@ -15,16 +15,15 @@ alias mkdir="mkdir -pv"
 alias bc="bc -ql"
 
 if command -v eza >/dev/null; then
-  alias l="eza --icons"
-  alias ls="eza --git --icons"
-  alias la="eza --git -a --icons"
-  alias ll="eza -lab --git --icons"
-  alias tree="eza --tree --icons"
+  ls() { command eza --git --icons "$@"; }
+  la() { command eza -a --git --icons "$@"; }
+  ll() { command eza -lab --git --icons "$@"; }
+  tree() { command eza --tree --icons "$@"; }
 else
-  alias l="ls --color=auto"
-  alias ls="ls --color=auto"
-  alias la="ls -la"
-  alias ll="ls -al"
+  ls() { command ls --color=auto "$@"; }
+  la() { command ls -la "$@"; }
+  ll() { command ls -al "$@"; }
+  tree() { command tree "$@"; }
 fi
 
 # chezmoi
@@ -35,6 +34,9 @@ alias ce="chezmoi edit"
 # tmux
 alias ta="tmux attach"
 alias td="tmux detach"
+
+# lazygit
+alias lg="lazygit"
 
 # git aliases (cherrypicked from oh-my-zsh plugin)
 alias ga="git add"

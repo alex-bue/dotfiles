@@ -76,8 +76,8 @@ shift-alt-c = 'close'
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-# alt-enter = 'exec-and-forget open -n /Applications/Nix\ Apps/WezTerm.app'
-alt-enter = 'exec-and-forget /bin/bash -lc "pgrep -qx wezterm-gui && wezterm cli spawn --new-window || open -na WezTerm.app'
+alt-enter = 'exec-and-forget open -n /Applications/Nix\ Apps/WezTerm.app'
+# alt-enter = 'exec-and-forget /bin/bash -lc "pgrep -qx wezterm-gui && wezterm cli spawn --new-window || open -na WezTerm.app'
 alt-b = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
 alt-y = 'exec-and-forget wezterm cli spawn --new-window -- yazi ~'
 
