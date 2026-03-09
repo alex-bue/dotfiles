@@ -4,6 +4,14 @@
 font-size = 14
 {{- else }}
 font-size = 12
+
+# Tab configuration
+gtk-titlebar = false
+
+# Shell integration
+shell-integration = detect
+shell-integration-features = cursor,sudo,title,no-cursor
+keybind = shift+enter=text:\n
 {{- end }}
 font-family = "JetBrainsMono Nerd Font"
 
@@ -23,11 +31,11 @@ scrollback-limit = 50000
 
 # Terminal features
 mouse-hide-while-typing = true
-copy-on-select = false
+copy-on-select = true
 confirm-close-surface = false
 
 # Disable annoying copied to clipboard
-app-notifications = no-clipboard-copy,no-config-reload
+app-notifications = no-clipboard-copy
 
 # Key bindings for common actions
 #keybind = ctrl+c=copy_to_clipboard
@@ -37,13 +45,5 @@ app-notifications = no-clipboard-copy,no-config-reload
 keybind = ctrl+plus=increase_font_size:1
 keybind = ctrl+minus=decrease_font_size:1
 keybind = ctrl+zero=reset_font_size
-
-# Tab configuration
-# gtk-titlebar = false
-
-# Shell integration
-# shell-integration = detect
-# shell-integration-features = cursor,sudo,title,no-cursor
-# keybind = shift+enter=text:\n
 
 theme = Everforest Dark Hard

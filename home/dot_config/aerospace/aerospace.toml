@@ -196,4 +196,4 @@ run = 'move-node-to-workspace 5'
 inherit-env-vars = true
 
 [exec.env-vars]
-PATH = '/run/current-system/sw/bin:${HOME}/.nix-profile/bin:${HOME}/.local/state/nix/profile/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
+PATH = '/etc/profiles/per-user/${USER}/bin:/run/current-system/sw/bin:${HOME}/.nix-profile/bin:${HOME}/.local/state/nix/profile/bin:/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
