@@ -14,10 +14,10 @@ alias rm="rm -iv"
 alias mkdir="mkdir -pv"
 alias bc="bc -ql"
 
-ls() { command -v eza >/dev/null 2>&1 && command eza --git --icons "$@" || command ls "$@"; }
-la() { command -v eza >/dev/null 2>&1 && command eza -a --git --icons "$@" || command ls -la "$@"; }
-ll() { command -v eza >/dev/null 2>&1 && command eza -lab --git --icons "$@" || command ls -al "$@"; }
-tree() { command -v eza >/dev/null 2>&1 && command eza --tree --icons "$@" || command tree "$@"; }
+#ls() { command -v eza >/dev/null 2>&1 && command eza --git --icons "$@" || command ls "$@"; }
+#la() { command -v eza >/dev/null 2>&1 && command eza -a --git --icons "$@" || command ls -la "$@"; }
+#ll() { command -v eza >/dev/null 2>&1 && command eza -lab --git --icons "$@" || command ls -al "$@"; }
+#tree() { command -v eza >/dev/null 2>&1 && command eza --tree --icons "$@" || command tree "$@"; }
 
 # chezmoi
 alias d="chezmoi cd"

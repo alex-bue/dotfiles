@@ -8,13 +8,13 @@ function module.apply_to_config(config)
 
 	-- Window
 	config.window_close_confirmation = "NeverPrompt"
-	config.window_decorations = "INTEGRATED_BUTTONS | RESIZE"
+	config.window_decorations = "TITLE | RESIZE"
 	config.window_background_opacity = 1
 	config.window_padding = {
 		left = "1cell",
 		right = "1cell",
-		top = "1.5cell",
-		bottom = "0cell",
+		top = "1cell",
+		bottom = "1cell",
 	}
 
 	-- Style inactive panes
@@ -37,9 +37,9 @@ function module.apply_to_config(config)
 	config.scrollback_lines = 5000
 
 	-- Window frame fonnt and colour
-	config.window_frame = {
-		font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" }),
-	}
+	-- config.window_frame = {
+	-- 	font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" }),
+	-- }
 end
 
 return module
