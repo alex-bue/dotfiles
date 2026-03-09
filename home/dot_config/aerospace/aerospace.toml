@@ -68,18 +68,17 @@ outer.right = 4
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
-cmd-h = []     # Disable "hide application"
-cmd-alt-h = [] # Disable "hide others"
+# cmd-h = []     # Disable "hide application"
+# cmd-alt-h = [] # Disable "hide others"
 
 shift-alt-c = 'close'
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
-alt-enter = 'exec-and-forget open -n /Applications/WezTerm.app'
-# alt-enter = 'exec-and-forget /bin/bash -lc "pgrep -qx wezterm-gui && wezterm cli spawn --new-window || open -na WezTerm.app'
-alt-b = 'exec-and-forget open -n /Applications/Google\ Chrome.app'
-alt-y = 'exec-and-forget wezterm cli spawn --new-window -- yazi ~'
+alt-enter = 'exec-and-forget open -na Ghostty.app'
+alt-b = 'exec-and-forget open -na Google\ Chrome.app'
+alt-y = 'exec-and-forget open -na Ghostty.app --args --command=yazi'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-f = 'fullscreen'
