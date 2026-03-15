@@ -1,7 +1,9 @@
 #!/bin/sh
 
+_has() { command -v "$1" >/dev/null 2>&1; }
+
 # use neovim for vim if present
-if command -v nvim >/dev/null 2>&1; then
+if _has nvim; then
   alias v='nvim'
   alias vim='nvim'
   alias vimdiff='nvim -d'
@@ -14,10 +16,39 @@ alias rm="rm -iv"
 alias mkdir="mkdir -pv"
 alias bc="bc -ql"
 
-#ls() { command -v eza >/dev/null 2>&1 && command eza --git --icons "$@" || command ls "$@"; }
-#la() { command -v eza >/dev/null 2>&1 && command eza -a --git --icons "$@" || command ls -la "$@"; }
-#ll() { command -v eza >/dev/null 2>&1 && command eza -lab --git --icons "$@" || command ls -al "$@"; }
-#tree() { command -v eza >/dev/null 2>&1 && command eza --tree --icons "$@" || command tree "$@"; }
+ls() {
+  if _has eza; then
+    command eza --git --icons=auto "$@"
+  else
+    command ls "$@"
+  fi
+}
+
+la() {
+  if _has eza; then
+    command eza -a --git --icons=auto "$@"
+  else
+    command ls -A "$@"
+  fi
+}
+
+ll() {
+  if _has eza; then
+    command eza -la --git --icons=auto "$@"
+  else
+    command ls -al "$@"
+  fi
+}
+
+tree() {
+  if _has eza; then
+    command eza --tree --icons=auto "$@"
+  elif _has tree; then
+    command tree "$@"
+  else
+    command ls -R "$@"
+  fi
+}
 
 # chezmoi
 alias d="chezmoi cd"
