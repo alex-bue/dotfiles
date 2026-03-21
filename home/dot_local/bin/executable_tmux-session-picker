@@ -3,11 +3,28 @@ set -euo pipefail
 
 TMUX_BIN="$(command -v tmux || true)"
 FZF_BIN="$(command -v fzf || true)"
+SCRIPT_PATH="/Users/ab/.local/bin/tmux-session-picker"
 
 if [[ -z "$TMUX_BIN" ]]; then
   echo "tmux not found"
   read -r -p "Press Enter to close..." _
   exit 1
+fi
+
+# AeroSpace runs commands without an interactive TTY.
+# If a tmux client already exists, open this picker there (no new terminal).
+# Only spawn Ghostty when there's no usable client context.
+if [[ ! -t 0 || ! -t 1 ]]; then
+  client_tty="$("$TMUX_BIN" list-clients -F '#{client_tty}' 2>/dev/null | head -n1 || true)"
+
+  if [[ -n "$client_tty" ]]; then
+    if "$TMUX_BIN" display-popup -t "$client_tty" -E "$SCRIPT_PATH" 2>/dev/null; then
+      exit 0
+    fi
+    exec open -na Ghostty.app --args --command="$SCRIPT_PATH"
+  fi
+
+  exec open -na Ghostty.app --args --command="$SCRIPT_PATH"
 fi
 
 if [[ -z "$FZF_BIN" ]]; then
