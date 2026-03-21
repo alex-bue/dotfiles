@@ -72,13 +72,16 @@ outer.right = 4
 # cmd-alt-h = [] # Disable "hide others"
 
 shift-alt-c = 'close'
+alt-q = 'close'
 
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 alt-enter = 'exec-and-forget open -na Ghostty.app'
 alt-b = 'exec-and-forget open -na Google\ Chrome.app'
+alt-c = 'exec-and-forget open -na WhatsApp\ Web.app'
 alt-y = 'exec-and-forget open -na Ghostty.app --args --command=yazi'
+alt-s = 'exec-and-forget open -na Ghostty.app --args --command=$HOME/.local/bin/tmux-session-picker'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-f = 'fullscreen'

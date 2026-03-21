@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TMUX_BIN="$(command -v tmux || true)"
+FZF_BIN="$(command -v fzf || true)"
+
+if [[ -z "$TMUX_BIN" ]]; then
+  echo "tmux not found"
+  read -r -p "Press Enter to close..." _
+  exit 1
+fi
+
+if [[ -z "$FZF_BIN" ]]; then
+  echo "fzf not found"
+  read -r -p "Press Enter to close..." _
+  exit 1
+fi
+
+pick_new_name() {
+  printf '' | "$FZF_BIN" \
+    --print-query \
+    --prompt='new session > ' \
+    --height=40% \
+    --margin=10%,20% \
+    --layout=reverse \
+    --border=rounded \
+    --info=inline \
+    --header='Type name and press Enter' \
+    | sed -n '1p' | tr -d '\r'
+}
+
+sessions="$($TMUX_BIN list-sessions -F '#{session_name}' 2>/dev/null || true)"
+menu=$'Create new session...\n'"$sessions"
+
+choice="$(printf '%b' "$menu" | "$FZF_BIN" \
+  --prompt='sessions > ' \
+  --height=80% \
+  --margin=6%,12% \
+  --padding=1,2 \
+  --layout=reverse \
+  --border=rounded \
+  --info=inline \
+  --header='Enter: select | Ctrl-J/K Ctrl-N/P Alt-J/K: move' \
+  --bind 'ctrl-j:down,ctrl-k:up,ctrl-n:down,ctrl-p:up,alt-j:down,alt-k:up' \
+  || true)"
+
+[[ -n "$choice" ]] || exit 0
+
+create=0
+session="$choice"
+
+if [[ "$choice" == 'Create new session...' ]]; then
+  session="$(pick_new_name || true)"
+  [[ -n "$session" ]] || exit 0
+  create=1
+fi
+
+if [[ ! "$session" =~ ^[A-Za-z0-9._-]+$ ]]; then
+  echo "Invalid session name: '$session'"
+  echo "Use letters, numbers, dot, underscore, or dash."
+  read -r -p "Press Enter to close..." _
+  exit 1
+fi
+
+if [[ -n "${TMUX:-}" ]]; then
+  if ! "$TMUX_BIN" has-session -t "$session" 2>/dev/null; then
+    "$TMUX_BIN" new-session -ds "$session"
+  fi
+  exec "$TMUX_BIN" switch-client -t "$session"
+fi
+
+if [[ "$create" -eq 1 ]]; then
+  exec "$TMUX_BIN" new-session -As "$session"
+fi
+
+if "$TMUX_BIN" has-session -t "$session" 2>/dev/null; then
+  exec "$TMUX_BIN" attach -t "$session"
+fi
+
+exec "$TMUX_BIN" new-session -As "$session"
