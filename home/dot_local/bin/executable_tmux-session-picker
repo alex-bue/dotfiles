@@ -36,30 +36,28 @@ fi
 pick_new_name() {
   printf '' | "$FZF_BIN" \
     --print-query \
-    --prompt='new session > ' \
+    --prompt='New session > ' \
     --height=40% \
     --margin=10%,20% \
     --layout=reverse \
     --border=rounded \
-    --info=inline \
-    --header='Type name and press Enter' \
-    | sed -n '1p' | tr -d '\r'
+    --info=inline |
+    sed -n '1p' | tr -d '\r'
 }
 
 sessions="$($TMUX_BIN list-sessions -F '#{session_name}' 2>/dev/null || true)"
 menu=$'Create new session...\n'"$sessions"
 
 choice="$(printf '%b' "$menu" | "$FZF_BIN" \
-  --prompt='sessions > ' \
+  --prompt='Sessions > ' \
   --height=80% \
   --margin=6%,12% \
   --padding=1,2 \
   --layout=reverse \
   --border=rounded \
   --info=inline \
-  --header='Enter: select | Ctrl-J/K Ctrl-N/P Alt-J/K: move' \
-  --bind 'ctrl-j:down,ctrl-k:up,ctrl-n:down,ctrl-p:up,alt-j:down,alt-k:up' \
-  || true)"
+  --bind 'ctrl-j:down,ctrl-k:up,ctrl-n:down,ctrl-p:up,alt-j:down,alt-k:up' ||
+  true)"
 
 [[ -n "$choice" ]] || exit 0
 
