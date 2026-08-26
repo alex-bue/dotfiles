@@ -19,7 +19,7 @@ jobs:
       - run: ./install.sh
       - name: Verify managed files
         run: |
-          "$HOME/.local/bin/chezmoi" verify
+          "$HOME/.local/bin/chezmoi" --source="$GITHUB_WORKSPACE" verify
           test -f "$HOME/.config/lazyvim/init.lua"
           test -f "$HOME/.p10k.zsh"
 
@@ -30,7 +30,7 @@ jobs:
       - run: ./install.sh
       - name: Verify managed files
         run: |
-          "$HOME/.local/bin/chezmoi" verify
+          "$HOME/.local/bin/chezmoi" --source="$GITHUB_WORKSPACE" verify
           test -f "$HOME/.config/lazyvim/init.lua"
           test -f "$HOME/.config/karabiner/karabiner.json"
           test -f "$HOME/.p10k.zsh"
