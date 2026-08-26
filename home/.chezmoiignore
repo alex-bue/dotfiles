@@ -1,16 +1,6 @@
 {{ if ne .chezmoi.os "darwin" }}
 .config/karabiner
-.config/aerospace
 {{ end }}
-
-{{ if .headless }}
-.config/wezterm
-{{ end }}
-
-# Currently not used at all (potentially delete yabai and skhd)
-.config/yabai
-.config/skhd
-.config/nvim-kickstart
 
 # Other repo contents
 .github/
