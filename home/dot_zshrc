@@ -6,7 +6,6 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000
 SAVEHIST=5000
 setopt share_history hist_ignore_space hist_ignore_dups
-bindkey -e
 
 autoload -Uz compinit
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
