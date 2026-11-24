@@ -6,7 +6,8 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000
 SAVEHIST=5000
 setopt share_history hist_ignore_space hist_ignore_dups
-bindkey -v
+# Don't infer vi bindings from EDITOR=nvim.
+bindkey -e
 
 autoload -Uz compinit
 cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
@@ -14,11 +15,29 @@ command mkdir -p "$cache"
 compinit -d "$cache/zcompdump"
 unset cache
 
-if command -v fzf >/dev/null && fzf_init=$(fzf --zsh 2>/dev/null); then
-  eval "$fzf_init"
+plugins="${XDG_CONFIG_HOME:-$HOME/.config}/zsh/plugins"
+if command -v fzf >/dev/null; then
+  if fzf_init=$(fzf --zsh 2>/dev/null); then
+    eval "$fzf_init"
+  fi
+  if [[ -r "$plugins/fzf-tab/fzf-tab.plugin.zsh" ]]; then
+    zstyle ':completion:*' menu no
+    zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
+    source "$plugins/fzf-tab/fzf-tab.plugin.zsh"
+  fi
 fi
 unset fzf_init
+
+if [[ -r "$plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source "$plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 
 if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 fi
+
+# Load highlighting after the other widgets are defined.
+if [[ -r "$plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source "$plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+unset plugins

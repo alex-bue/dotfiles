@@ -51,7 +51,14 @@ fi
 
 TERM=xterm-256color bash -ic 'test "$EDITOR" = nvim && type z y >/dev/null'
 if command -v zsh >/dev/null; then
-  TERM=xterm-256color zsh -ic '[[ $EDITOR == nvim ]] && whence z y >/dev/null'
+  TERM=xterm-256color zsh -ic '
+    [[ $EDITOR == nvim ]] && whence z y >/dev/null &&
+      [[ $(bindkey -lL main) == "bindkey -A emacs main" ]] &&
+      [[ $(bindkey "^I") == *" fzf-tab-complete" ]] &&
+      (( $+widgets[autosuggest-accept] && $+functions[_zsh_highlight] ))
+  '
+else
+  [ ! -e "$HOME/.config/zsh/plugins" ]
 fi
 mise -C "$HOME" exec -- sh -ec '
   for tool in direnv fd fzf gh herdr just lazygit nvim rg starship tree-sitter uv yazi zoxide; do
