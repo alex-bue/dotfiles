@@ -4,33 +4,17 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
-  clone-and-install-linux:
+  bootstrap:
     strategy:
       fail-fast: false
       matrix:
-        runner: [ubuntu-latest, ubuntu-24.04-arm] # amd64 + arm64
+        runner: [ubuntu-latest, ubuntu-24.04-arm, macos-latest]
     runs-on: ${{ matrix.runner }}
-
-    container:
-      image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
     steps:
       - uses: actions/checkout@v4
-      - run: ./install.sh
-      - name: Verify managed files
-        run: |
-          "$HOME/.local/bin/chezmoi" --source="$GITHUB_WORKSPACE" verify
-          test -f "$HOME/.config/lazyvim/init.lua"
-          test -f "$HOME/.p10k.zsh"
-
-  clone-and-install-macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v4
-      - run: ./install.sh
-      - name: Verify managed files
-        run: |
-          "$HOME/.local/bin/chezmoi" --source="$GITHUB_WORKSPACE" verify
-          test -f "$HOME/.config/lazyvim/init.lua"
-          test -f "$HOME/.config/karabiner/karabiner.json"
-          test -f "$HOME/.p10k.zsh"
+      - name: Bootstrap and reapply in a disposable home
+        run: sh tests/bootstrap.sh

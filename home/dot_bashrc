@@ -1,0 +1,18 @@
+case $- in
+  *i*) ;;
+  *) return ;;
+esac
+
+source "$HOME/.config/shell/env.sh"
+shell_tools_init bash
+source "$HOME/.config/shell/aliases.sh"
+
+if command -v fzf >/dev/null && fzf_init=$(fzf --bash 2>/dev/null); then
+  eval "$fzf_init"
+fi
+unset fzf_init
+
+if command -v starship >/dev/null; then
+  eval "$(starship init bash)"
+fi
+_dotfiles_bashrc_loaded=1

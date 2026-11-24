@@ -1,0 +1,24 @@
+source "$HOME/.config/shell/env.sh"
+shell_tools_init zsh
+source "$HOME/.config/shell/aliases.sh"
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=5000
+SAVEHIST=5000
+setopt share_history hist_ignore_space hist_ignore_dups
+bindkey -v
+
+autoload -Uz compinit
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+command mkdir -p "$cache"
+compinit -d "$cache/zcompdump"
+unset cache
+
+if command -v fzf >/dev/null && fzf_init=$(fzf --zsh 2>/dev/null); then
+  eval "$fzf_init"
+fi
+unset fzf_init
+
+if command -v starship >/dev/null; then
+  eval "$(starship init zsh)"
+fi

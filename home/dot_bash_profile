@@ -1,0 +1,10 @@
+# Keep the login setup that Bash would otherwise source.
+if [ -r "$HOME/.bash_login" ]; then
+  source "$HOME/.bash_login"
+elif [ -r "$HOME/.profile" ]; then
+  source "$HOME/.profile"
+fi
+
+if [ -z "${_dotfiles_bashrc_loaded:-}" ]; then
+  source "$HOME/.bashrc"
+fi

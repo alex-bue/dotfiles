@@ -1,9 +1,4 @@
-{{ if ne .chezmoi.os "darwin" }}
-.config/karabiner
-{{ end }}
-
-# Other repo contents
-.github/
-install.sh
-LICENSE
-README.md
+{{- if has "tmux" .disabledFeatures }}
+.config/tmux
+.local/bin/tmux-session-picker
+{{- end }}
