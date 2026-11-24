@@ -1,0 +1,19 @@
+# User-space binaries only; see README.md for optional tools and prerequisites.
+[tools]
+"aqua:direnv/direnv" = "latest"
+"aqua:eza-community/eza" = { version = "latest", os = ["linux"] }
+"aqua:sharkdp/fd" = "latest"
+"aqua:junegunn/fzf" = "latest"
+"aqua:cli/cli" = "latest"
+"aqua:herdrdev/herdr" = "latest"
+"aqua:casey/just" = "latest"
+"aqua:jesseduffield/lazygit" = "latest"
+"aqua:neovim/neovim" = "latest"
+"aqua:BurntSushi/ripgrep" = "latest"
+"aqua:joshmedeski/sesh" = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:tmux/tmux-builds" = "latest"
+"aqua:tree-sitter/tree-sitter" = "latest"
+"aqua:astral-sh/uv" = "latest"
+"aqua:sxyazi/yazi" = "latest"
+"aqua:ajeetdsouza/zoxide" = "latest"

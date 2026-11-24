@@ -1,0 +1,30 @@
+{{ if (get . "portable") -}}
+{{ range $name, $repo := dict
+    "fzf-tab" "Aloxaf/fzf-tab"
+    "powerlevel10k" "romkatv/powerlevel10k"
+    "zsh-autosuggestions" "zsh-users/zsh-autosuggestions"
+    "zsh-completions" "zsh-users/zsh-completions"
+    "zsh-syntax-highlighting" "zsh-users/zsh-syntax-highlighting"
+    "zsh-vi-mode" "jeffreytse/zsh-vi-mode" -}}
+[".config/zsh/plugins/{{ $name }}"]
+type = "git-repo"
+url = "https://github.com/{{ $repo }}.git"
+refreshPeriod = "168h"
+{{ end -}}
+{{ range $name, $repo := dict
+    "tmux-better-mouse-mode" "nhdaly/tmux-better-mouse-mode"
+    "tmux-continuum" "tmux-plugins/tmux-continuum"
+    "tmux-resurrect" "tmux-plugins/tmux-resurrect"
+    "tmux-sensible" "tmux-plugins/tmux-sensible" -}}
+[".config/tmux/plugins/{{ $name }}"]
+type = "git-repo"
+url = "https://github.com/{{ $repo }}.git"
+refreshPeriod = "168h"
+{{ end -}}
+
+[".config/tmux/plugins/smart-splits"]
+type = "archive"
+url = "https://github.com/smart-splits-nvim/backend-tmux/archive/9e9e6aa9b3eb7a8d3896a993611622ac97abff52.tar.gz"
+stripComponents = 1
+exact = true
+{{ end -}}
