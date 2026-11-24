@@ -1,66 +1,70 @@
 # Dotfiles
 
-There are two install modes. `./install.sh` keeps the existing **mutable-only**
-setup (LazyVim, Powerlevel10k, and Karabiner on macOS) for homes managed by
-Nix/Home Manager. On a standalone Linux or macOS home, use the **portable**
-profile to get dotfiles and CLI tools without Nix or `sudo`:
+User-level setup for Linux and macOS. Bash is enough; if you already use Zsh,
+you get the same prompt, tools, and aliases. Setup never changes your login
+shell or asks for `sudo`.
+
+## Set up a fresh machine
+
+You'll need Git, a writable home, HTTPS access, curl, and common archive tools.
+Install Chezmoi into your home and let it fetch and apply the dotfiles:
 
 ```sh
-git clone https://github.com/alex-bue/dotfiles.git ~/repos/dotfiles
-cd ~/repos/dotfiles
-./install.sh --portable --preview
-./install.sh --portable
+sh -c "$(curl -fsSL https://chezmoi.io/get)" -- \
+  -b "$HOME/.local/bin" init --apply alex-bue
 ```
 
-Start a new shell afterward. Bash and Zsh are both supported; the installer
-does not change your login shell. Keep the checkout and rerun the same command
-after pulling updates. `--skip-tools` applies the configs and shell/tmux plugins
-without installing mise or its tools. `--preview` shows the config diff without
-applying it or installing the CLI tools (it can bootstrap Chezmoi and populate
-its download cache).
-
-Use a fresh user account to try this on a Nix machine. The portable installer
-refuses to replace links into `/nix/store`. Back up any existing writable shell
-or application files and review the diff before a first apply. To migrate a
-Home Manager home later, first retire Home Manager's ownership of the paths
-you want Chezmoi to manage. Don't use `chezmoi apply --force` to bypass this.
-
-The installer applies from its own checkout and selects the profile on each
-run. If you want plain `chezmoi diff` and `chezmoi apply` (including the `ca`
-alias) on a standalone machine, set Chezmoi's `sourceDir` to this checkout and
-`data.portable` to `true` in your local Chezmoi config (`chezmoi edit-config`).
-Use the installer if you want the Nix-link check.
-
-## Ownership and requirements
-
-- **Chezmoi**: Bash/Zsh startup and plugins, Git defaults and ignores, Starship,
-  Herdr, tmux and its plugins/session picker, Ghostty and WezTerm config, plus
-  AeroSpace on macOS. It does not install graphical apps or fonts.
-- **mise**: the user-level CLI list in
-  [`10-dotfiles.toml`](home/dot_config/mise/conf.d/10-dotfiles.toml). It uses
-  release binaries rather than an OS package manager. `mise install` fills in
-  missing tools; use `mise upgrade` when you want newer versions. On macOS,
-  install `eza` separately if desired; the aliases fall back to `ls` without it.
-- **Outside this profile**: OS services, system login configuration, the
-  Niri/Noctalia desktop setup, and Nix-specific tools such as `nh` and `statix`.
-  Optional coding tools can be installed separately with
-  `mise use -g aqua:openai/codex aqua:anomalyco/opencode aqua:earendil-works/pi`.
-  Authentication and agent integrations are not part of bootstrap.
-
-The bootstrap expects a writable home, Git, Bash for the Bash setup and tmux
-picker, common archive utilities, HTTPS access, and curl or wget for the
-initial downloads. Dotfiles use the default `~/.config` layout. On restricted
-VMs some binaries may need a newer libc, and building LazyVim parsers can still
-require a compiler. Use `--skip-tools` if release downloads are restricted or
-you already have the tools another way.
-
-For Git identity, keep your existing `~/.gitconfig` or create an unmanaged
-local include:
+That command runs the upstream Chezmoi installer. If you already have Chezmoi,
+run `chezmoi init --apply alex-bue`. On a machine with existing dotfiles, back
+up your files and review the diff before applying:
 
 ```sh
-git config --file "$HOME/.config/git/local" user.name 'Your Name'
-git config --file "$HOME/.config/git/local" user.email 'you@example.com'
+chezmoi init alex-bue
+chezmoi diff
+chezmoi apply
 ```
 
-Run `sh tests/bootstrap.sh` to exercise both install modes, the Nix-link guard,
-and the CLI and tmux setup in a disposable home.
+Start a new shell afterward. In the current shell, run
+`export PATH="$HOME/.local/bin:$PATH"` if `chezmoi` isn't on your path yet.
+Update with `chezmoi update`.
+
+## Git identity
+
+First setup asks for your Git name and email, offering your current global Git
+values as defaults. Choose the right values for **this machine**; nothing is
+inferred from the hostname. Answers are saved in your local Chezmoi config and
+are not committed to this repo. Change them with `chezmoi edit-config` and
+`chezmoi apply`. An existing `~/.gitconfig` can override these values; check
+`git config --show-origin --get user.email` if the result isn't what you expect.
+For different identities on the same machine, use Git `includeIf` or set the
+identity per repository.
+
+For unattended setup, pass explicit answers (including empty values if you do
+not want to set an identity), or pass `--promptDefaults` to accept the existing
+Git values without prompting:
+
+```sh
+chezmoi init --apply --promptString 'Git name=Your Name,Git email=you@example.com' alex-bue
+```
+
+## What gets installed
+
+- **Chezmoi** deploys Bash and Zsh startup, Git defaults and ignores, Starship,
+  Herdr, tmux and its plugins/session picker, and your LazyVim config.
+- **mise** installs the CLI tools in
+  [`10-dotfiles.toml`](home/dot_config/mise/conf.d/10-dotfiles.toml), including
+  Neovim, Herdr, tmux, fzf, and ripgrep. Chezmoi installs mise into
+  `~/.local/bin` if needed and runs `mise install` on apply. Use `mise upgrade`
+  when you want newer tool versions. The `ls` aliases fall back to `ls` where
+  `eza` isn't installed.
+- **LazyVim** installs its plugins on the first `nvim` launch. Some plugins
+  still need system prerequisites, such as a C compiler for Tree-sitter parsers.
+
+Desktop apps, fonts, system packages, and coding agent installs and logins are
+outside this setup. On restricted VMs, a release binary may require a newer libc
+or network access you don't have. If the tools are already installed or you want
+to handle them separately, use `chezmoi apply --exclude=scripts` to skip the
+installer hook (plugin checkouts still need network access).
+
+Run `sh tests/bootstrap.sh` from the repo root to test setup and a repeat apply
+in a disposable home.

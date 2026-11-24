@@ -16,5 +16,5 @@ jobs:
     runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
-      - name: Test both profiles in a disposable home
+      - name: Bootstrap and reapply in a disposable home
         run: sh tests/bootstrap.sh

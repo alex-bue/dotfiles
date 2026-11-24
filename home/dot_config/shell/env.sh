@@ -8,14 +8,6 @@ done
 export PATH
 unset dir
 
-if [ "$(uname -s)" = Darwin ] && ! command -v brew >/dev/null 2>&1; then
-  if [ -x /opt/homebrew/bin/brew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [ -x /usr/local/bin/brew ]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-fi
-
 export FZF_DEFAULT_OPTS='--height=45% --layout=reverse --border --cycle --preview-window=right,55%'
 export FZF_CTRL_R_OPTS='--sort --exact'
 export FZF_ALT_C_OPTS='--preview="eza -la --color=always {} 2>/dev/null || ls -la {}"'

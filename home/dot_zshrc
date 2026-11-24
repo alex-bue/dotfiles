@@ -1,66 +1,24 @@
 source "$HOME/.config/shell/env.sh"
-plugins="$HOME/.config/zsh/plugins"
-
-if [[ -r "$plugins/powerlevel10k/powerlevel10k.zsh-theme" && -r "$HOME/.p10k.zsh" ]]; then
-  instant_prompt="${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-  [[ ! -r $instant_prompt ]] || source "$instant_prompt"
-  unset instant_prompt
-fi
-
 shell_tools_init zsh
 source "$HOME/.config/shell/aliases.sh"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000
 SAVEHIST=5000
-setopt append_history share_history hist_ignore_space hist_expire_dups_first
-setopt hist_ignore_dups hist_ignore_all_dups hist_find_no_dups hist_save_no_dups
+setopt share_history hist_ignore_space hist_ignore_dups
+bindkey -v
 
-[[ ! -d "$plugins/zsh-completions/src" ]] || fpath=("$plugins/zsh-completions/src" $fpath)
-cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-mkdir -p "$cache"
 autoload -Uz compinit
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+command mkdir -p "$cache"
 compinit -d "$cache/zcompdump"
 unset cache
-
-_comp_options+=(globdots)
-zstyle ':completion:*' menu no
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 if command -v fzf >/dev/null && fzf_init=$(fzf --zsh 2>/dev/null); then
   eval "$fzf_init"
 fi
 unset fzf_init
 
-zvm_after_init() {
-  local keymap
-  for keymap in viins vicmd; do
-    if (( $+widgets[fzf-history-widget] )); then
-      bindkey -M "$keymap" '^R' fzf-history-widget
-    fi
-    if (( $+widgets[autosuggest-accept] )); then
-      bindkey -M "$keymap" '^Y' autosuggest-accept
-    fi
-  done
-}
-
-for plugin in fzf-tab/fzf-tab.plugin.zsh \
-              zsh-autosuggestions/zsh-autosuggestions.zsh \
-              zsh-vi-mode/zsh-vi-mode.plugin.zsh; do
-  [[ ! -r "$plugins/$plugin" ]] || source "$plugins/$plugin"
-done
-
-if [[ -r "$plugins/powerlevel10k/powerlevel10k.zsh-theme" && -r "$HOME/.p10k.zsh" ]]; then
-  source "$plugins/powerlevel10k/powerlevel10k.zsh-theme"
-  source "$HOME/.p10k.zsh"
-elif command -v starship >/dev/null; then
+if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 fi
-
-# The highlighter must load after plugins that define widgets.
-[[ ! -r "$plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] ||
-  source "$plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-unset plugin plugins

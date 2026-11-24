@@ -1,3 +1,11 @@
+[user]
+    useConfigOnly = true
+{{- with get . "gitName" }}
+    name = {{ . | quote }}
+{{- end }}
+{{- with get . "gitEmail" }}
+    email = {{ . | quote }}
+{{- end }}
 [init]
     defaultBranch = main
 [core]
@@ -25,5 +33,3 @@
     log = log --oneline --decorate --graph
     lol = log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
     lols = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)'
-[include]
-    path = local

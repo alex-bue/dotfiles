@@ -1,0 +1,11 @@
+{{- $currentName := "" -}}
+{{- $currentEmail := "" -}}
+{{- if lookPath "git" -}}
+  {{- $currentName = output "git" "config" "--global" "--get" "--default" "" "user.name" | trim -}}
+  {{- $currentEmail = output "git" "config" "--global" "--get" "--default" "" "user.email" | trim -}}
+{{- end -}}
+{{- $name := promptStringOnce . "gitName" "Git name" $currentName -}}
+{{- $email := promptStringOnce . "gitEmail" "Git email" $currentEmail -}}
+[data]
+gitName = {{ $name | quote }}
+gitEmail = {{ $email | quote }}

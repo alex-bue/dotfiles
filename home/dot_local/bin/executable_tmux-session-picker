@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# GUI launchers and tmux servers do not always inherit interactive shell setup.
+# tmux servers do not always inherit interactive shell setup.
 export PATH="$HOME/.local/bin:$PATH"
 if command -v mise >/dev/null; then
   eval "$(mise -C "$HOME" env -s bash)"
@@ -20,10 +20,6 @@ if [[ ! -t 0 || ! -t 1 ]]; then
     if tmux display-popup -t "$client_tty" -w 40% -h 70% -E "$script_path" 2>/dev/null; then
       exit 0
     fi
-  fi
-
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    exec open -na Ghostty.app --args --command="$script_path"
   fi
 
   echo "tmux-session-picker requires an interactive terminal" >&2
