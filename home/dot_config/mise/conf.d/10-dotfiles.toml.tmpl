@@ -1,4 +1,4 @@
-# User-space binaries only; see README.md for optional tools and prerequisites.
+# User-space binaries only.
 [tools]
 "aqua:direnv/direnv" = "latest"
 "aqua:eza-community/eza" = { version = "latest", os = ["linux"] }
@@ -11,7 +11,7 @@
 "aqua:neovim/neovim" = "latest"
 "aqua:BurntSushi/ripgrep" = "latest"
 "aqua:starship/starship" = "latest"
-{{- if .enableTmux }}
+{{- if not (has "tmux" .disabledFeatures) }}
 "aqua:joshmedeski/sesh" = "latest"
 "aqua:tmux/tmux-builds" = "latest"
 {{- end }}

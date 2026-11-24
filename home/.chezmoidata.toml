@@ -1,2 +1,3 @@
-# Enable when tmux should be part of the shared setup again.
-enableTmux = false
+# Repo-wide opt-outs. Use the same feature name for its config paths,
+# externals, packages, and shell wiring. Remove a name to re-enable it.
+disabledFeatures = ["tmux"]

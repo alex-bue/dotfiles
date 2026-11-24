@@ -55,7 +55,7 @@ alias d="chezmoi cd"
 alias ca="chezmoi apply"
 alias ce="chezmoi edit"
 
-{{ if .enableTmux -}}
+{{ if not (has "tmux" .disabledFeatures) -}}
 # tmux
 alias ta="tmux attach"
 alias td="tmux detach"

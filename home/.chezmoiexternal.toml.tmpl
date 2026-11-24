@@ -1,4 +1,4 @@
-{{ if .enableTmux -}}
+{{ if not (has "tmux" .disabledFeatures) -}}
 {{ range $name, $repo := dict
     "tmux-better-mouse-mode" "nhdaly/tmux-better-mouse-mode"
     "tmux-continuum" "tmux-plugins/tmux-continuum"
