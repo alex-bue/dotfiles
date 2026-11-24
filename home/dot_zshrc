@@ -6,7 +6,6 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000
 SAVEHIST=5000
 setopt share_history hist_ignore_space hist_ignore_dups
-# Don't infer vi bindings from EDITOR=nvim.
 bindkey -e
 
 autoload -Uz compinit
