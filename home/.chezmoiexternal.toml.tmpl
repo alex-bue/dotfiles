@@ -1,3 +1,26 @@
+{{ if lookPath "zsh" -}}
+[".config/zsh/plugins/fzf-tab"] # v1.3.0
+type = "archive"
+url = "https://github.com/Aloxaf/fzf-tab/archive/d7e0234614dbe5369fdd760907d12c0e05a4dccc.tar.gz"
+checksum.sha256 = "3f0f56c168ab59ad87363a15931f27847eac5dfc34e10a033a04ae84372c56ac"
+stripComponents = 1
+exact = true
+
+[".config/zsh/plugins/zsh-autosuggestions"] # v0.7.1
+type = "archive"
+url = "https://github.com/zsh-users/zsh-autosuggestions/archive/e52ee8ca55bcc56a17c828767a3f98f22a68d4eb.tar.gz"
+checksum.sha256 = "166fad9326c99904fd3b16b5d770efb4f5df39a674599e72bba8fc41636ab065"
+stripComponents = 1
+exact = true
+
+[".config/zsh/plugins/zsh-syntax-highlighting"] # 0.8.0
+type = "archive"
+url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/db085e4661f6aafd24e5acb5b2e17e4dd5dddf3e.tar.gz"
+checksum.sha256 = "874999413d147b7ad6776077e1b756d31d68284f9ef2ef240b33a4c842f0e1d8"
+stripComponents = 1
+exact = true
+{{ end -}}
+
 {{ if not (has "tmux" .disabledFeatures) -}}
 {{ range $name, $repo := dict
     "tmux-better-mouse-mode" "nhdaly/tmux-better-mouse-mode"
