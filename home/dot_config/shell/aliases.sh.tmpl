@@ -55,9 +55,11 @@ alias d="chezmoi cd"
 alias ca="chezmoi apply"
 alias ce="chezmoi edit"
 
+{{ if .enableTmux -}}
 # tmux
 alias ta="tmux attach"
 alias td="tmux detach"
+{{ end -}}
 
 # lazygit
 alias lg="lazygit"

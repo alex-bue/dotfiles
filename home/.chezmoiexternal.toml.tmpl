@@ -1,3 +1,4 @@
+{{ if .enableTmux -}}
 {{ range $name, $repo := dict
     "tmux-better-mouse-mode" "nhdaly/tmux-better-mouse-mode"
     "tmux-continuum" "tmux-plugins/tmux-continuum"
@@ -14,3 +15,4 @@ type = "archive"
 url = "https://github.com/smart-splits-nvim/backend-tmux/archive/9e9e6aa9b3eb7a8d3896a993611622ac97abff52.tar.gz"
 stripComponents = 1
 exact = true
+{{ end -}}

@@ -1,0 +1,2 @@
+# Enable when tmux should be part of the shared setup again.
+enableTmux = false

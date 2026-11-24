@@ -42,21 +42,20 @@ cm verify --exclude=scripts
 [ -f "$HOME/.config/lazyvim/init.lua" ]
 [ -f "$HOME/.config/herdr/config.toml" ]
 [ -f "$HOME/.config/starship.toml" ]
-[ -x "$HOME/.local/bin/tmux-session-picker" ]
+[ ! -e "$HOME/.config/tmux" ]
+[ ! -e "$HOME/.local/bin/tmux-session-picker" ]
+if grep -Eq 'tmux-builds|joshmedeski/sesh' "$HOME/.config/mise/conf.d/10-dotfiles.toml"; then
+  echo 'The default tool list unexpectedly includes tmux or sesh.' >&2
+  exit 1
+fi
 
 TERM=xterm-256color bash -ic 'test "$EDITOR" = nvim && type z y >/dev/null'
 if command -v zsh >/dev/null; then
   TERM=xterm-256color zsh -ic '[[ $EDITOR == nvim ]] && whence z y >/dev/null'
 fi
 mise -C "$HOME" exec -- sh -ec '
-  for tool in direnv fd fzf gh herdr just lazygit nvim rg sesh starship tree-sitter uv yazi zoxide; do
+  for tool in direnv fd fzf gh herdr just lazygit nvim rg starship tree-sitter uv yazi zoxide; do
     "$tool" --version >/dev/null
   done
   if [ "$(uname -s)" = Linux ]; then eza --version >/dev/null; fi
-  tmux -V
-  export TERM=xterm-256color
-  tmux -S "$HOME/tmux-test.sock" -f "$HOME/.config/tmux/tmux.conf" new-session -d
-  trap '\''tmux -S "$HOME/tmux-test.sock" kill-server'\'' EXIT
-  [ "$(tmux -S "$HOME/tmux-test.sock" show-option -gv prefix)" = C-Space ]
-  tmux -S "$HOME/tmux-test.sock" show-option -gv status-right | grep -q continuum_save
 '

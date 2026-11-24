@@ -50,15 +50,20 @@ chezmoi init --apply --promptString 'Git name=Your Name,Git email=you@example.co
 ## What gets installed
 
 - **Chezmoi** deploys Bash and Zsh startup, Git defaults and ignores, Starship,
-  Herdr, tmux and its plugins/session picker, and your LazyVim config.
+  Herdr, and your LazyVim config.
 - **mise** installs the CLI tools in
-  [`10-dotfiles.toml`](home/dot_config/mise/conf.d/10-dotfiles.toml), including
-  Neovim, Herdr, tmux, fzf, and ripgrep. Chezmoi installs mise into
+  [`10-dotfiles.toml.tmpl`](home/dot_config/mise/conf.d/10-dotfiles.toml.tmpl),
+  including Neovim, Herdr, fzf, and ripgrep. Chezmoi installs mise into
   `~/.local/bin` if needed and runs `mise install` on apply. Use `mise upgrade`
   when you want newer tool versions. The `ls` aliases fall back to `ls` where
   `eza` isn't installed.
 - **LazyVim** installs its plugins on the first `nvim` launch. Some plugins
   still need system prerequisites, such as a C compiler for Tree-sitter parsers.
+
+tmux is disabled for the shared setup. Its config is kept in the repo; set
+`enableTmux = true` in [`home/.chezmoidata.toml`](home/.chezmoidata.toml) to
+bring back tmux, sesh, the plugins, and the session picker. Disabling it does
+not uninstall existing binaries or delete existing config files.
 
 Desktop apps, fonts, system packages, and coding agent installs and logins are
 outside this setup. On restricted VMs, a release binary may require a newer libc

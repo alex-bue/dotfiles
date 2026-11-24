@@ -1,0 +1,4 @@
+{{- if not .enableTmux }}
+.config/tmux
+.local/bin/tmux-session-picker
+{{- end }}
