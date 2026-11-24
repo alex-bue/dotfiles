@@ -60,7 +60,7 @@ else
   [ ! -e "$HOME/.config/zsh/plugins" ]
 fi
 mise -C "$HOME" exec -- sh -ec '
-  for tool in direnv fd fzf gh herdr just lazygit nvim rg starship tree-sitter uv yazi zoxide; do
+  for tool in direnv fd fzf gh herdr jq just lazygit nvim rg starship tree-sitter uv yazi zoxide; do
     "$tool" --version >/dev/null
   done
   if [ "$(uname -s)" = Linux ]; then eza --version >/dev/null; fi
